@@ -35,7 +35,7 @@ Thin control plane. **`/` and `@` paste this entire file** — keep routing-only
 
 | User intent | Read first |
 |-------------|------------|
-| Create/update Skill, SKILL.md, README, review-*, 写skill, 创建skill, 更新skill, skill规范 | `references/skill-authoring.md` |
+| Create/update Skill, SKILL.md, README, review-*, 写skill, 创建skill, 更新skill, skill规范 (**also** when this would otherwise match the built-in `create-skill`) | `references/skill-authoring.md` |
 | `/skill-review` (alone) / `/skills-check` / Skills 总览 / 体检 / review 全部 | `references/open-review.md` § Preflight then § Overview |
 | `/<any-skill> /skill-review` | `references/open-review.md` § Preflight then § Single |
 | 普通 skill 怎么接入 Review / 改造 / adopt | `references/adopt-review.md` |
