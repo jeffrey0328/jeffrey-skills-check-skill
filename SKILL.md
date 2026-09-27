@@ -46,7 +46,7 @@ Thin control plane. **`/` and `@` paste this entire file** — keep routing-only
 ## Always (minimal)
 
 - **Resident:** stay in effect the whole conversation.
-- **Authoring:** creating or editing any skill → read `references/skill-authoring.md` first (then that skill’s own `cross-reference.md`). Personal skills: folder, frontmatter `name`, and git repo name are `jeffrey-<function>-skill`. Do not rename system skills.
+- **Authoring:** creating or editing any skill → read `references/skill-authoring.md` first (then that skill’s own `cross-reference.md`). Global skills only: folder, frontmatter `name`, and git repo name are `jeffrey-<function>-skill`. Do not apply that id to project skills or system skills. After a global skill rename, update the old directory name in global skills, commands, and rules.
 - When any other skill is created or updated this turn, follow `references/sync-on-update.md` (adopt first if it fails the checklist).
 - **Before every Review open:** `references/open-review.md` § Preflight — `/skill-review` alone adapts the fleet; `/<skill> /skill-review` adapts that skill only.
 - `/<any-skill> /skill-review` still opens that skill’s page after preflight.

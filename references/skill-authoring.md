@@ -210,9 +210,9 @@ The install prompt says「某一个 Agent 产品」, not an agent app name.
 
 This section is the ban list (needed so the checker can name what is forbidden). CSS `cursor:` in stylesheets is the CSS property, not an agent app name. A git host (`origin.cursor.com`, `cursor.com`), a hyphenated command or record id (`/push-cursor`, `cursor-config`), a git remote name written as a code span or after `add ` / `-u `, or a protocol prompt deeplink (`cursor://…`), is a host/CLI identifier, not an agent app name.
 
-## Personal skill id (required)
+## Global skill id (required)
 
-Personal skills live under the current agent app’s default skills path. Three strings are the same id:
+This id applies only to **global** skills: directories directly under the current agent app’s default skills path. Three strings are the same id:
 
 - the skill directory name
 - `SKILL.md` frontmatter `name`
@@ -220,13 +220,17 @@ Personal skills live under the current agent app’s default skills path. Three 
 
 The id is `jeffrey-<function>-skill`. `<function>` is one or more lowercase segments: `aaa` or `aaa-bbb-ccc`. It must start with `jeffrey-` and end with `-skill`.
 
-Built-in system skills (the agent app’s bundled skills directory, outside that personal path) are out of scope.
+Project skills (a skill that lives in a project, not in that default skills path) are out of scope. Built-in system skills are out of scope. Do not rename them for this rule, and do not flag them in Review.
 
-**Must:** folder, frontmatter `name`, and origin repo name are one `jeffrey-<function>-skill` id. `/skill-review` reports a mismatch as 缺件.
+**Must:** a global skill’s folder, frontmatter `name`, and origin repo name are one `jeffrey-<function>-skill` id. `/skill-review` reports a mismatch as 缺件. Project skills and system skills are not checked.
 
-**Must not:** Rename a system skill, or run this id check on one. *(← Must: personal skills only)*
+**Must:** after that folder or repo is renamed, update every mention of the old directory name in global skills, global commands, and global rules. This skill’s Review reports a leftover path to a missing skill directory as 缺件.
 
-**Must not:** Leave a personal skill whose folder, frontmatter `name`, or origin repo name breaks that id or disagrees with the others. *(← Must: one id)*
+**Must not:** Rename a project skill or a system skill to satisfy this id, or run this id check on one. *(← Must: global skills only)*
+
+**Must not:** Leave a global skill whose folder, frontmatter `name`, or origin repo name breaks that id or disagrees with the others. *(← Must: one id)*
+
+**Must not:** Leave the old directory name in global skills, commands, or rules after the rename. *(← Must: update mentions after rename)*
 
 ## Auto-invocation decision (required when creating)
 

@@ -48,10 +48,10 @@ Records **who references each tracked file** and whether the reference is to the
 ### skill-authoring.md
 | Referenced by | 范围 |
 |---------------|------|
-| `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Personal skill id |
-| `hub-norms.md` File index + Must + DoD | 整篇 + § Personal skill id |
+| `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Global skill id |
+| `hub-norms.md` File index + Must + DoD | 整篇 + § Global skill id |
 | `adopt-review.md` 读法 + § Checklist | 整篇 + § Three layers / § Synchronize / § Positive / negative |
-| `open-review.md` | 整篇 + § Personal skill id |
+| `open-review.md` | 整篇 + § Global skill id |
 | `sync-on-update.md` | § Synchronize companion files |
 | `review-body.md` 能做什么 / 执行步骤 | 整篇 |
 | `examples/three-layer-layout.md` | § Three layers |

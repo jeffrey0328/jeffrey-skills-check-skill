@@ -2,8 +2,9 @@
 
 - **Skill 规范**：
   - 管每个 skill 必须怎么写：形态规范在 `references/skill-authoring.md`
-  - 个人 skill 的文件夹、frontmatter `name`、git 仓库名都是 `jeffrey-<功能名>-skill`（功能名是 `aaa` 或 `aaa-bbb-ccc`）
-  - 系统 skill 不改名，Review 也不拿这条去查它们
+  - 只约束全局 skill：文件夹、frontmatter `name`、git 仓库名都是 `jeffrey-<功能名>-skill`（功能名是 `aaa` 或 `aaa-bbb-ccc`）
+  - 项目里的 skill 和系统 skill 不改名，Review 也不拿这条去查它们
+  - 全局 skill 改名后，在全局 skills、commands、rules 里把旧目录名改成新名字；还指向已不存在目录的路径算缺件
   - 不要用具体 Agent 应用名，写成当前 Agent / Agent
 - **打开 Review**：
   - 两种页面：Skills 总览，和单个 skill 的 Review

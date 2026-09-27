@@ -1369,6 +1369,68 @@ def build_content_sections(
 SKILL_ID_RE = re.compile(r"^jeffrey-[a-z0-9]+(?:-[a-z0-9]+)*-skill$")
 
 
+def global_skills_root() -> Path:
+    """Default personal skills path: parent of this skill. Not a project tree."""
+    return Path(__file__).resolve().parents[2]
+
+
+def is_global_skill(folder: Path) -> bool:
+    try:
+        return folder.resolve().parent == global_skills_root()
+    except OSError:
+        return False
+
+
+_STALE_SKILL_PATHS = (
+    re.compile(r"(?i)skills[/\\]([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*-skill)(?![A-Za-z0-9-])"),
+    re.compile(r"(?<![A-Za-z0-9-])([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)(?=[/\\]SKILL\.md\b)"),
+    re.compile(r"(?<![A-Za-z0-9-])([A-Za-z0-9]+(?:-[A-Za-z0-9]+)*)(?=[/\\]references[/\\])"),
+)
+_STALE_SKIP_NAMES = {"references", "scripts", "examples", "standards", "modules", "templates", "memory", "docs", "tools"}
+_STALE_TEXT_EXTS = {".md", ".mdc", ".py", ".ps1", ".json", ".mjs", ".txt", ".html", ".toml", ".yml", ".yaml"}
+
+
+def stale_global_skill_mentions(skills_root: Path) -> list[str]:
+    """Paths in global skills, commands, and rules that name a skill directory which is not there."""
+    current = {p.name for p in list_skill_dirs(skills_root)}
+    roots = [skills_root, skills_root.parent / "commands", skills_root.parent / "rules"]
+    hits: list[str] = []
+    seen: set[tuple[str, str]] = set()
+    for root in roots:
+        if not root.exists():
+            continue
+        files = [root] if root.is_file() else root.rglob("*")
+        for path in files:
+            if not path.is_file() or path.suffix.lower() not in _STALE_TEXT_EXTS:
+                continue
+            if ".git" in path.parts or "examples" in path.parts:
+                continue
+            try:
+                text = path.read_text(encoding="utf-8")
+            except (OSError, UnicodeError):
+                continue
+            found: set[str] = set()
+            for cre in _STALE_SKILL_PATHS:
+                for match in cre.finditer(text):
+                    name = match.group(1)
+                    if name in current or name.lower() in _STALE_SKIP_NAMES:
+                        continue
+                    found.add(name)
+            if not found:
+                continue
+            try:
+                rel = str(path.relative_to(skills_root.parent)).replace("\\", "/")
+            except ValueError:
+                rel = str(path)
+            for name in sorted(found):
+                key = (rel, name)
+                if key in seen:
+                    continue
+                seen.add(key)
+                hits.append(f"{rel} 仍写着 `{name}`")
+    return hits
+
+
 def origin_repo_name(folder: Path) -> str | None:
     """Last path segment of origin, without .git. None when there is no origin."""
     if not (folder / ".git").exists():
@@ -1499,24 +1561,43 @@ def check_skill(folder: Path) -> dict:
     else:
         add("fm_name", "fail", "frontmatter name", "缺失")
 
-    repo_name = origin_repo_name(folder)
-    id_problems: list[str] = []
-    if not SKILL_ID_RE.fullmatch(name):
-        id_problems.append(f"文件夹 `{name}` 不是 jeffrey-<功能名>-skill")
-    if not fm_name:
-        id_problems.append("frontmatter name 缺失")
-    elif fm_name != name:
-        id_problems.append(f"frontmatter name `{fm_name}` 与文件夹不一致")
-    if repo_name is None:
-        id_problems.append("没有 origin，仓库名无法核对")
-    elif not SKILL_ID_RE.fullmatch(repo_name):
-        id_problems.append(f"git 仓库 `{repo_name}` 不是 jeffrey-<功能名>-skill")
-    elif repo_name != name:
-        id_problems.append(f"git 仓库 `{repo_name}` 与文件夹不一致")
-    if id_problems:
-        add("skill_id", "fail", "命名", "；".join(id_problems))
+    if not is_global_skill(folder):
+        add("skill_id", "pass", "命名", "不是全局 skill，不要求 jeffrey-<功能名>-skill")
     else:
-        add("skill_id", "pass", "命名", f"{name} · {repo_name}")
+        repo_name = origin_repo_name(folder)
+        id_problems: list[str] = []
+        if not SKILL_ID_RE.fullmatch(name):
+            id_problems.append(f"文件夹 `{name}` 不是 jeffrey-<功能名>-skill")
+        if not fm_name:
+            id_problems.append("frontmatter name 缺失")
+        elif fm_name != name:
+            id_problems.append(f"frontmatter name `{fm_name}` 与文件夹不一致")
+        if repo_name is None:
+            id_problems.append("没有 origin，仓库名无法核对")
+        elif not SKILL_ID_RE.fullmatch(repo_name):
+            id_problems.append(f"git 仓库 `{repo_name}` 不是 jeffrey-<功能名>-skill")
+        elif repo_name != name:
+            id_problems.append(f"git 仓库 `{repo_name}` 与文件夹不一致")
+        if id_problems:
+            add("skill_id", "fail", "命名", "；".join(id_problems))
+        else:
+            add("skill_id", "pass", "命名", f"{name} · {repo_name}")
+
+    this_skill = Path(__file__).resolve().parents[1]
+    if folder.resolve() == this_skill:
+        stale = stale_global_skill_mentions(global_skills_root())
+        if stale:
+            detail = "；".join(stale[:8])
+            if len(stale) > 8:
+                detail += f" …共 {len(stale)} 处"
+            add("stale_skill_name", "fail", "改名后的旧引用", detail)
+        else:
+            add(
+                "stale_skill_name",
+                "pass",
+                "改名后的旧引用",
+                "全局 skills、commands、rules 没有指向不存在的 skill 目录",
+            )
 
     if tags:
         add("tag", "pass", "tag.txt", "、".join(tags))

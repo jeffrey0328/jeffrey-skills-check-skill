@@ -46,12 +46,14 @@
 - Keep this hub thin; long runbooks stay in `references/`.
 - Default open to the agent’s built-in browser (`open-review.md` § Browser).
 - Companion sync and Must-not pairing follow `skill-authoring.md`（README 两份 + Review 三页 + 不用具体 Agent 应用名）。
-- Personal skills use one id for the folder, frontmatter `name`, and origin repo name: `jeffrey-<function>-skill` (`aaa` or `aaa-bbb-ccc`). `/skill-review` marks a mismatch 缺件. System skills stay out of this rule — `skill-authoring.md` § Personal skill id.
+- Global skills (direct children of the current app’s default skills path) use one id for the folder, frontmatter `name`, and origin repo name: `jeffrey-<function>-skill` (`aaa` or `aaa-bbb-ccc`). `/skill-review` marks a mismatch 缺件. Project skills and system skills stay out of this rule — `skill-authoring.md` § Global skill id.
+- After a global skill rename, update the old directory name in global skills, commands, and rules. This skill’s Review marks a leftover path to a missing skill directory as 缺件.
 
 ## Must not
 
-- Rename a system skill, or apply the personal skill id check to one. *(← Must: personal skill id)*
-- Leave a personal skill whose folder, frontmatter name, or origin repo name is not that same id. *(← Must: personal skill id)*
+- Rename a project skill or a system skill, or apply the global skill id check to one. *(← Must: global skill id)*
+- Leave a global skill whose folder, frontmatter name, or origin repo name is not that same id. *(← Must: global skill id)*
+- Leave the old directory name in global skills, commands, or rules after a rename. *(← Must: update the old directory name)*
 - Stuff the adopt/sync playbooks into `SKILL.md`. *(← Must: keep this hub thin)*
 - Open overview via `/jeffrey-workflow-skill -reviewall`. *(← Must: overview is `/skill-review`)*
 - Default-open Review in the external browser. *(← Must: built-in browser)*
@@ -62,7 +64,8 @@
 - [ ] Review open ran § Preflight (overview = fleet; single page = that skill only); in-scope unadapted skills were fixed before the viewer started.
 - [ ] Intent routed to one of: `skill-authoring.md` / `open-review.md` / `adopt-review.md` / `sync-on-update.md`.
 - [ ] 关联记录 checked + updated when files or `##` headings changed.
-- [ ] Personal skill folder, frontmatter `name`, and origin repo name are the same `jeffrey-<function>-skill` id. System skills were not renamed.
+- [ ] Global skill folder, frontmatter `name`, and origin repo name are the same `jeffrey-<function>-skill` id. Project skills and system skills were not renamed for this rule.
+- [ ] After a global skill rename, old directory names are updated in global skills, commands, and rules.
 - [ ] Companions aligned (`README.md` / `README.zh.md` / `review-*` / `tag.txt` / `kind.txt`) or explicitly unchanged with reason.
 - [ ] Opener template changes regenerated with `--write-open-scripts`.
 - [ ] Post-write user brief when this skill’s Route / workflow changed.

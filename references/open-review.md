@@ -143,9 +143,10 @@ File roles and pairing rules: `skill-authoring.md`.
 | **能做什么条目** | 页面「功能描述」：功能本身、规则、细节；每项子列表；不重复命令/执行步骤，不写人类页 | — | 标签后写成一段；或把 slash 命令、`先`/`再`/`然后`、人类页清单写进功能描述 |
 | **README 面向用户** | 具体内容只有 功能介绍 + 怎么用（你说什么 → 会发生什么）+ 常见改动（想改什么 → 对 Agent 说的一句话） | — | README 残留文件角色 / 目录清单表或 `何时` / `怎么调用` / `What it does` 之类多余小节；缺 `功能介绍` / `怎么用` / `常见改动` |
 | **肯定/否定配对** | 无否定句，或每条 Must not 与某条 Must 有包含/重合（或显式 `← Must`） | — | 否定句缺少重合肯定句；README/正文里冗余括号否定 |
-| **命名** | 个人 skill 的文件夹、frontmatter `name`、origin 仓库名相同，且为 `jeffrey-<功能名>-skill`（`aaa` 或 `aaa-bbb-ccc`） | 三者有一个不符合或彼此不一致 | — |
+| **命名** | 只查全局 skill（当前 Agent 默认 skills 路径下的直接子目录）：文件夹、frontmatter `name`、origin 仓库名相同，且为 `jeffrey-<功能名>-skill`（`aaa` 或 `aaa-bbb-ccc`） | 全局 skill 三者有一个不符合或彼此不一致 | — |
+| **改名后的旧引用** | 全局 skills、commands、rules 里不再有指向已不存在 skill 目录的路径（`skills/<旧名>`、`<旧名>/SKILL.md`、`<旧名>/references/`） | 仍有这种路径 | — |
 
-Violations of the pairing rule are **需关注**, not 缺件. A missing README file, missing other-language entry, wrong README section order, or a personal skill id mismatch is **缺件**. System skills are not in this scan. The id rule is `skill-authoring.md` § Personal skill id. Review reports it; it does not rename git repos by itself.
+Violations of the pairing rule are **需关注**, not 缺件. A missing README file, missing other-language entry, wrong README section order, a global skill id mismatch, or a leftover path to a renamed skill directory is **缺件**. Project skills and system skills are not checked for the id, and this sweep does not scan project trees. The rule is `skill-authoring.md` § Global skill id. Review reports it; it does not rename git repos by itself.
 
 ## Must
 
