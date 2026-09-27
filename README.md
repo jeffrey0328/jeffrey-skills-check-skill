@@ -1,4 +1,4 @@
-# skills-check
+# jeffrey-skills-check-skill
 
 [中文](README.zh.md)
 
@@ -9,24 +9,25 @@ Skill-shape norms plus Feishu-style Review for skills under the current agent ap
 Install through the current agent. Paste the fenced block to that agent.
 
 ```
-Install the skill "skills-check" into the agent app you are currently running in.
-Repo: https://github.com/jeffrey0328/skills-check.git
+Install the skill "jeffrey-skills-check-skill" into the agent app you are currently running in.
+Repo: https://github.com/jeffrey0328/jeffrey-skills-check-skill.git
 Steps:
 1. First read and follow this agent app's current skill spec (install directory, frontmatter, how skills are attached, project pointers, human-page requirements). Do not edit files until that spec is read. Do not apply another agent product's paths or fields from memory.
-2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "skills-check".
+2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "jeffrey-skills-check-skill".
 3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/, review-body.md, or examples/.
 ```
 
 ## Features
 
 - Keeps every skill in the same shape: when one is created or edited, the agent writes it to the shared form and keeps the human pages and Review pages in sync.
+- Personal skills use one id, `jeffrey-<function>-skill`, for the folder, the skill name, and the git repo. Review flags a mismatch. System skills are left alone.
 - Opens the all-skills overview and a single skill’s Review page: the overview preflights the fleet; a single `/skill-review` with that skill named preflights that skill only. Flagged items have 开对话 (prefilled chat, confirm send) and Ignore.
 - Filters the overview by tag or type (演进型 / 底本型), and lets you right-click a card to edit tags or switch type (saves immediately).
 - Adds Review companions and that skill’s own `/skill-review` to a skill that does not have them yet.
 
 ## How to use
 
-**Resident** — the agent attaches this skill on its own, in every conversation; you do not have to `@` it. It fires whenever a skill is created or edited (the agent reads the authoring spec first), and whenever you ask to see the state of your skills. You can still say `/skill-review`, `/skills-check`, or `@skills-check`.
+**Resident** — the agent attaches this skill on its own, in every conversation; you do not have to `@` it. It fires whenever a skill is created or edited (the agent reads the authoring spec first), and whenever you ask to see the state of your skills. You can still say `/skill-review`, `/jeffrey-skills-check-skill`, or `@jeffrey-skills-check-skill`.
 
 | You say | What happens |
 |---------|--------------|

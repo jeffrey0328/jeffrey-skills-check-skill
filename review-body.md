@@ -2,6 +2,8 @@
 
 - **Skill 规范**：
   - 管每个 skill 必须怎么写：形态规范在 `references/skill-authoring.md`
+  - 个人 skill 的文件夹、frontmatter `name`、git 仓库名都是 `jeffrey-<功能名>-skill`（功能名是 `aaa` 或 `aaa-bbb-ccc`）
+  - 系统 skill 不改名，Review 也不拿这条去查它们
   - 不要用具体 Agent 应用名，写成当前 Agent / Agent
 - **打开 Review**：
   - 两种页面：Skills 总览，和单个 skill 的 Review

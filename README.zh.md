@@ -1,4 +1,4 @@
-# skills-check
+# jeffrey-skills-check-skill
 
 [English](README.md)
 
@@ -9,24 +9,25 @@
 通过 Agent 安装。把下面代码块整段交给当前 Agent。
 
 ```
-请把 skill「skills-check」安装到你当前所在的 Agent 应用。
-仓库：https://github.com/jeffrey0328/skills-check.git
+请把 skill「jeffrey-skills-check-skill」安装到你当前所在的 Agent 应用。
+仓库：https://github.com/jeffrey0328/jeffrey-skills-check-skill.git
 步骤：
 1. 先读取并遵守你当前这个 Agent 的 skill 规范（安装目录、frontmatter、挂载方式、项目指针、人类页要求）。未读到该规范之前不要改文件。不要凭记忆套用某一个 Agent 产品的路径和字段。
-2. 按该规范把该仓库克隆到当前 Agent 的默认 skills 路径，文件夹名用「skills-check」。
+2. 按该规范把该仓库克隆到当前 Agent 的默认 skills 路径，文件夹名用「jeffrey-skills-check-skill」。
 3. 再按该规范改本 skill 里需要对接到当前 Agent 的部分。不要通读 references/、review-body.md、examples/ 里的流程正文。
 ```
 
 ## 功能介绍
 
 - 管每个 skill 必须怎么写：创建或编辑时先按统一形态落盘，人类页和 Review 页一起齐。
+- 个人 skill 的文件夹、名字和 git 仓库名都是 `jeffrey-<功能名>-skill`。Review 会把对不上的标成缺件。系统 skill 不动。
 - 打开 Skills 总览和单个 skill 的 Review 页：总览先体检整套 skill；`/<skill> /skill-review` 只体检当前这一个。被标出的需关注/缺件可点「开对话」弹出预填对话（确认后才发送），需关注也可点「忽略」。
 - 在总览页按标签或类型（演进型 / 底本型）筛选，右键卡片改标签或改类型，保存即写入。
 - 给还没接入 Review 的 skill 补齐配套文件和它自己的 `/skill-review`。
 
 ## 怎么用
 
-**常驻** —— 每轮对话 Agent 自己会挂载，不需要你 `@`。只要有 skill 被创建或修改（Agent 动手前先读编写规范），或者你想看 skill 的状态，它就会生效。仍然可以说 `/skill-review`、`/skills-check` 或 `@skills-check`。
+**常驻** —— 每轮对话 Agent 自己会挂载，不需要你 `@`。只要有 skill 被创建或修改（Agent 动手前先读编写规范），或者你想看 skill 的状态，它就会生效。仍然可以说 `/skill-review`、`/jeffrey-skills-check-skill` 或 `@jeffrey-skills-check-skill`。
 
 | 你说 | 会发生什么 |
 |------|------------|

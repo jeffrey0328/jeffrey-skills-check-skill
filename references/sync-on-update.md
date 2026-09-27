@@ -46,7 +46,7 @@ When **this** skill changes (`skills-check-viewer.py`, `OPEN_REVIEW_PS1` templat
 2. **If the opener template changed** (the string that `ensure_open_review_scripts` writes), rewrite every skill’s script in the same turn:
 
 ```powershell
-python "<skills-check>/scripts/skills-check-viewer.py" --write-open-scripts --print
+python "<jeffrey-skills-check-skill>/scripts/skills-check-viewer.py" --write-open-scripts --print
 ```
 
 3. **If adopt / sync / open runbooks changed**, keep this skill’s own `review-intro.md` / `review-body.md` / `review-usage.md` / `README.md` / `README.zh.md` aligned (same companion rule as any other skill).

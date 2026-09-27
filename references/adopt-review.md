@@ -10,9 +10,9 @@ Work in the **current agent app’s default skills root** (`open-review.md` § S
 
 A skill supports Review when all of the following are true:
 
-1. The overview (`/skill-review` alone, or `/skills-check`) can scan it and render 简介 / 能做什么 / 使用方法 / 执行步骤.
+1. The overview (`/skill-review` alone, or `/jeffrey-skills-check-skill`) can scan it and render 简介 / 能做什么 / 使用方法 / 执行步骤.
 2. `/<that-skill> /skill-review` opens **that** skill’s single page (not the overview).
-3. Its `scripts/open-review.ps1` points at **this** skill’s viewer: `skills-check/scripts/skills-check-viewer.py`.
+3. Its `scripts/open-review.ps1` points at **this** skill’s viewer: `jeffrey-skills-check-skill/scripts/skills-check-viewer.py`.
 
 ## Checklist (required files)
 
@@ -25,7 +25,7 @@ Do this in the **target skill directory** under the current skills root.
 | `README.zh.md` | Human | **Required.** Chinese. After the `#` title: `[English](README.md)`. Same facts and order: 简介 → `## 安装`（**中文** Agent 提示词：仓库地址 + 步骤）→ `## 功能介绍`（能做什么，短列表）→ `## 怎么用`（你说什么 → 会发生什么；何时触发写在引导句里）→ `## 常见改动`（想改什么 → 对 Agent 说的一句话）。不写 `何时` / `怎么调用` / 文件角色 / 目录清单表. Do not use a specific agent app name. Missing, no English entry, or wrong order = 缺件. |
 | `review-intro.md` | Human | One short **Chinese** plain-text paragraph for Feishu 简介. No `**bold**`, no `` `code` ``. Do not use a specific agent app name. |
 | `review-body.md` | Human | Chinese `## 能做什么` (**功能描述**: feature + rules + details, not 命令 / 执行步骤 / 人类页) and `## 执行步骤` (what each step does; last on the page). Split 能做什么 only when jobs are loosely related. Each item is `- **标签**：` plus nested bullets (one fact per line), not a paragraph. Every item has a matching `###` — even one step. Bold **only the lead label** before `：`. Do not use a specific agent app name. |
-| `review-usage.md` | Human | Chinese `## 使用方法` as one sentence (常驻 / `@` / 关键词). `## 功能` + `### <能做什么标题>` + `####` 命令/参数/脚本/工具. **Omit** `/skill-review` and `/skills-check` on domain skills. No agent-only script list, no `## description 内容`. Do not use a specific agent app name. |
+| `review-usage.md` | Human | Chinese `## 使用方法` as one sentence (常驻 / `@` / 关键词). `## 功能` + `### <能做什么标题>` + `####` 命令/参数/脚本/工具. **Omit** `/skill-review` and `/jeffrey-skills-check-skill` on domain skills. No agent-only script list, no `## description 内容`. Do not use a specific agent app name. |
 | `tag.txt` | Human / Review | One UTF-8 line. Multiple tags: comma-separated. Propose, then write what the user confirms. |
 | `kind.txt` | Human / Review | One UTF-8 line: `演进` or `底本`. Propose with the tag; default existing fleet to `演进`. |
 | `scripts/open-review.ps1` | Agent | Generated — do not hand-write a different viewer path. See § Generate opener. |
@@ -61,10 +61,10 @@ Keep `/skill-review` on the **agent** hub only. The human Review page (`review-u
 From any machine that has this skill installed:
 
 ```powershell
-python "<skills-check>/scripts/skills-check-viewer.py" --write-open-scripts --print
+python "<jeffrey-skills-check-skill>/scripts/skills-check-viewer.py" --write-open-scripts --print
 ```
 
-This writes/overwrites `scripts/open-review.ps1` in **every** skill under the current skills root so they all call `skills-check\scripts\skills-check-viewer.py --skill <that-folder>`.
+This writes/overwrites `scripts/open-review.ps1` in **every** skill under the current skills root so they all call `jeffrey-skills-check-skill\scripts\skills-check-viewer.py --skill <that-folder>`.
 
 If you are adopting only one new folder and the template has not changed, you may copy an existing sibling `open-review.ps1` — the generated body is identical across skills (it discovers its own folder).
 
@@ -73,7 +73,7 @@ If you are adopting only one new folder and the template has not changed, you ma
 Write only sections that have real content:
 
 1. `## 使用方法` — one sentence on how to invoke. No `###`.
-2. `## 功能` — under `### <能做什么标题>`, only `####` 命令 / 参数 / 脚本 / 工具. Skip when none. Do not list `/skill-review` or `/skills-check` on domain skills.
+2. `## 功能` — under `### <能做什么标题>`, only `####` 命令 / 参数 / 脚本 / 工具. Skip when none. Do not list `/skill-review` or `/jeffrey-skills-check-skill` on domain skills.
 
 ## After authoring the companions
 
@@ -82,8 +82,8 @@ Follow `skill-authoring.md` § Synchronize companion files and § Positive / neg
 ## Verify
 
 1. `/<skill> /skill-review` → single page `#/skill/<folder>`; 简介 / 能做什么 / 怎么用 match the three `review-*.md` files.
-2. `/skill-review` (alone) or `/skills-check` → overview card for that folder (tag + intro + health checks).
-3. `scripts/open-review.ps1` contains `skills-check\scripts\skills-check-viewer.py`.
+2. `/skill-review` (alone) or `/jeffrey-skills-check-skill` → overview card for that folder (tag + intro + health checks).
+3. `scripts/open-review.ps1` contains `jeffrey-skills-check-skill\scripts\skills-check-viewer.py`.
 
 ## Must
 

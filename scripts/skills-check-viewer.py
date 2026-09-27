@@ -15,11 +15,11 @@
 用法:
   python skills-check-viewer.py
   python skills-check-viewer.py "C:\\Users\\...\\skills"
-  python skills-check-viewer.py --skill "C:\\Users\\...\\skills\\ue-dev-skill"
+  python skills-check-viewer.py --skill "C:\\Users\\...\\skills\\jeffrey-ue-dev-skill"
   python skills-check-viewer.py --port 18765
   python skills-check-viewer.py --no-browser
   python skills-check-viewer.py --print
-  python skills-check-viewer.py --print --skill "C:\\Users\\...\\skills\\ue-dev-skill"
+  python skills-check-viewer.py --print --skill "C:\\Users\\...\\skills\\jeffrey-ue-dev-skill"
 """
 
 from __future__ import annotations
@@ -45,10 +45,10 @@ SKIP_DIRS = {"logs", "scripts", ".git"}
 # Legacy review.html section ids (still mined for content)
 LEGACY_SECTION_IDS = ("can-do", "steps", "contents", "examples")
 AUTO_INVOKE_OK = {
-    "user-profile",
+    "jeffrey-user-profile-skill",
     "jeffrey-workflow-skill",
-    "video-creator-skill",
-    "skills-check",
+    "jeffrey-video-creator-skill",
+    "jeffrey-skills-check-skill",
 }
 LARGE_SKILL_LINES = 180
 VIEWER_PROC_MARK = "skills-check-viewer"
@@ -1366,6 +1366,34 @@ def build_content_sections(
     }
 
 
+SKILL_ID_RE = re.compile(r"^jeffrey-[a-z0-9]+(?:-[a-z0-9]+)*-skill$")
+
+
+def origin_repo_name(folder: Path) -> str | None:
+    """Last path segment of origin, without .git. None when there is no origin."""
+    if not (folder / ".git").exists():
+        return None
+    try:
+        url = subprocess.check_output(
+            ["git", "-C", str(folder), "remote", "get-url", "origin"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+            timeout=15,
+        ).strip()
+    except (subprocess.CalledProcessError, OSError, subprocess.TimeoutExpired):
+        return None
+    if not url:
+        return None
+    tail = url.rstrip("/").split("/")[-1]
+    if tail.endswith(".git"):
+        tail = tail[:-4]
+    if ":" in tail:
+        tail = tail.split(":")[-1]
+        if tail.endswith(".git"):
+            tail = tail[:-4]
+    return tail or None
+
+
 def list_skill_dirs(root: Path) -> list[Path]:
     if not root.is_dir():
         return []
@@ -1470,6 +1498,25 @@ def check_skill(folder: Path) -> dict:
             )
     else:
         add("fm_name", "fail", "frontmatter name", "缺失")
+
+    repo_name = origin_repo_name(folder)
+    id_problems: list[str] = []
+    if not SKILL_ID_RE.fullmatch(name):
+        id_problems.append(f"文件夹 `{name}` 不是 jeffrey-<功能名>-skill")
+    if not fm_name:
+        id_problems.append("frontmatter name 缺失")
+    elif fm_name != name:
+        id_problems.append(f"frontmatter name `{fm_name}` 与文件夹不一致")
+    if repo_name is None:
+        id_problems.append("没有 origin，仓库名无法核对")
+    elif not SKILL_ID_RE.fullmatch(repo_name):
+        id_problems.append(f"git 仓库 `{repo_name}` 不是 jeffrey-<功能名>-skill")
+    elif repo_name != name:
+        id_problems.append(f"git 仓库 `{repo_name}` 与文件夹不一致")
+    if id_problems:
+        add("skill_id", "fail", "命名", "；".join(id_problems))
+    else:
+        add("skill_id", "pass", "命名", f"{name} · {repo_name}")
 
     if tags:
         add("tag", "pass", "tag.txt", "、".join(tags))
@@ -1752,14 +1799,14 @@ def check_skill(folder: Path) -> dict:
     open_script = folder / "scripts" / "open-review.ps1"
     if open_script.is_file():
         opener_text = open_script.read_text(encoding="utf-8", errors="replace")
-        if "skills-check" in opener_text and "skills-check-viewer.py" in opener_text:
-            add("open_review", "pass", "scripts/open-review.ps1", "指向 skills-check viewer")
+        if "jeffrey-skills-check-skill" in opener_text and "skills-check-viewer.py" in opener_text:
+            add("open_review", "pass", "scripts/open-review.ps1", "指向 jeffrey-skills-check-skill viewer")
         else:
             add(
                 "open_review",
                 "fail",
                 "scripts/open-review.ps1",
-                "未指向 skills-check/scripts/skills-check-viewer.py",
+                "未指向 jeffrey-skills-check-skill/scripts/skills-check-viewer.py",
             )
     else:
         add("open_review", "fail", "scripts/open-review.ps1", "缺失")
@@ -2859,19 +2906,19 @@ function statusIcon(st) {
 function authoringSpecPath() {
   const root = String(DATA.skills_root || "").replace(/[\\/]+$/, "");
   const sep = root.includes("\\") ? "\\" : "/";
-  return root + sep + "skills-check" + sep + "references" + sep + "skill-authoring.md";
+  return root + sep + "jeffrey-skills-check-skill" + sep + "references" + sep + "skill-authoring.md";
 }
 function buildFixPrompt(s, issue) {
   const path = s.path || s.folder;
   const spec = `先读 ${authoringSpecPath()}，再读该 skill 的 cross-reference.md，按规范改完并同步人类页。不要扩大范围。`;
   if (issue) {
     const level = issue.level === "fail" ? "缺件" : "需关注";
-    return `请用 /skills-check 规范修复这个 skill 的 Review 问题。\n\nSkill：${s.folder}\n路径：${path}\n级别：${level}\n问题：${issue.text}\n\n${spec}`;
+    return `请用 /jeffrey-skills-check-skill 规范修复这个 skill 的 Review 问题。\n\nSkill：${s.folder}\n路径：${path}\n级别：${level}\n问题：${issue.text}\n\n${spec}`;
   }
   const list = (s.issues || []).map((i, n) =>
     `${n + 1}. [${i.level === "fail" ? "缺件" : "需关注"}] ${i.text}`
   ).join("\n");
-  return `请用 /skills-check 规范修复 skill「${s.folder}」的全部 Review 问题。\n\n路径：${path}\n\n${list}\n\n${spec}`;
+  return `请用 /jeffrey-skills-check-skill 规范修复 skill「${s.folder}」的全部 Review 问题。\n\n路径：${path}\n\n${list}\n\n${spec}`;
 }
 
 function issueLineHtml(s, issue) {
@@ -3912,7 +3959,7 @@ OPEN_REVIEW_PS1 = r"""# Open Feishu-style Review for this skill (sibling switche
 $ErrorActionPreference = 'Stop'
 $SkillRoot = Split-Path -Parent $PSScriptRoot
 $SkillsRoot = Split-Path -Parent $SkillRoot
-$Viewer = Join-Path $SkillsRoot 'skills-check\scripts\skills-check-viewer.py'
+$Viewer = Join-Path $SkillsRoot 'jeffrey-skills-check-skill\scripts\skills-check-viewer.py'
 if (-not (Test-Path -LiteralPath $Viewer)) {
     throw "找不到 skills-check-viewer.py: $Viewer"
 }

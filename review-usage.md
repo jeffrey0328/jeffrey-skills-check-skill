@@ -14,7 +14,7 @@
 |------|------|
 | `/skill-review` | 打开 Skills 总览 |
 | `/<skill> /skill-review` | 只体检该 skill，再打开它的单页 |
-| `/skills-check` | 打开 Skills 总览（同单独 `/skill-review`） |
+| `/jeffrey-skills-check-skill` | 打开 Skills 总览（同单独 `/skill-review`） |
 
 #### 工具
 
