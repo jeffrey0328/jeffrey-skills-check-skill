@@ -20,7 +20,7 @@ Steps:
 ## Features
 
 - Keeps every skill in the same shape: when one is created or edited, the agent writes it to the shared form and keeps the human pages and Review pages in sync.
-- Global skills use one id, `jeffrey-<function>-skill`, for the folder, the skill name, and the git repo. Review flags a mismatch. Project skills and system skills are left alone.
+- Global skills use one id, `jeffrey-<function>-skill`, for the folder, the skill name, and the git repo. Review flags a mismatch. A Stride skill uses the `stride-` prefix instead, for example `stride-workbench`. Project skills and system skills are left alone.
 - After a global skill is renamed, old directory names in global skills, commands, and rules are updated. Review flags a path that still points at a missing skill directory.
 - Opens the all-skills overview and a single skill’s Review page: the overview preflights the fleet; a single `/skill-review` with that skill named preflights that skill only. Flagged items have 开对话 (prefilled chat, confirm send) and Ignore.
 - Filters the overview by tag or type (演进型 / 底本型), and lets you right-click a card to edit tags or switch type (saves immediately).

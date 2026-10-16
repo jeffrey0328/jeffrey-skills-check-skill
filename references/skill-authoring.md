@@ -220,13 +220,15 @@ This id applies only to **global** skills: directories directly under the curren
 
 The id is `jeffrey-<function>-skill`. `<function>` is one or more lowercase segments: `aaa` or `aaa-bbb-ccc`. It must start with `jeffrey-` and end with `-skill`.
 
+**Stride prefix.** A skill whose job is Stride uses the folder prefix `stride-` and that same string as frontmatter `name`. Example: `stride-workbench`. That skill does not use the `jeffrey-<function>-skill` id. When it has an origin, the repository name matches the folder.
+
 Project skills (a skill that lives in a project, not in that default skills path) are out of scope. Built-in system skills are out of scope. Do not rename them for this rule, and do not flag them in Review.
 
-**Must:** a global skill’s folder, frontmatter `name`, and origin repo name are one `jeffrey-<function>-skill` id. `/skill-review` reports a mismatch as 缺件. Project skills and system skills are not checked.
+**Must:** a global skill’s folder, frontmatter `name`, and origin repo name are one `jeffrey-<function>-skill` id, or one `stride-` id when the skill’s job is Stride. `/skill-review` reports a mismatch as 缺件. Project skills and system skills are not checked.
 
 **Must:** after that folder or repo is renamed, update every mention of the old directory name in global skills, global commands, and global rules. This skill’s Review reports a leftover path to a missing skill directory as 缺件.
 
-**Must not:** Rename a project skill or a system skill to satisfy this id, or run this id check on one. *(← Must: global skills only)*
+**Must not:** Rename a project skill, a system skill, or a `stride-` skill to satisfy the `jeffrey-<function>-skill` id. *(← Must: global skills only; Stride keeps the `stride-` prefix)*
 
 **Must not:** Leave a global skill whose folder, frontmatter `name`, or origin repo name breaks that id or disagrees with the others. *(← Must: one id)*
 

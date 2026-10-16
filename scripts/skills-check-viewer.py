@@ -1367,6 +1367,11 @@ def build_content_sections(
 
 
 SKILL_ID_RE = re.compile(r"^jeffrey-[a-z0-9]+(?:-[a-z0-9]+)*-skill$")
+STRIDE_ID_RE = re.compile(r"^stride-[a-z0-9]+(?:-[a-z0-9]+)*$")
+
+
+def matches_skill_id(name: str) -> bool:
+    return bool(SKILL_ID_RE.fullmatch(name) or STRIDE_ID_RE.fullmatch(name))
 
 
 def global_skills_root() -> Path:
@@ -1566,16 +1571,16 @@ def check_skill(folder: Path) -> dict:
     else:
         repo_name = origin_repo_name(folder)
         id_problems: list[str] = []
-        if not SKILL_ID_RE.fullmatch(name):
-            id_problems.append(f"文件夹 `{name}` 不是 jeffrey-<功能名>-skill")
+        if not matches_skill_id(name):
+            id_problems.append(f"文件夹 `{name}` 不是 jeffrey-<功能名>-skill，也不是 stride- 前缀")
         if not fm_name:
             id_problems.append("frontmatter name 缺失")
         elif fm_name != name:
             id_problems.append(f"frontmatter name `{fm_name}` 与文件夹不一致")
         if repo_name is None:
             id_problems.append("没有 origin，仓库名无法核对")
-        elif not SKILL_ID_RE.fullmatch(repo_name):
-            id_problems.append(f"git 仓库 `{repo_name}` 不是 jeffrey-<功能名>-skill")
+        elif not matches_skill_id(repo_name):
+            id_problems.append(f"git 仓库 `{repo_name}` 不是 jeffrey-<功能名>-skill，也不是 stride- 前缀")
         elif repo_name != name:
             id_problems.append(f"git 仓库 `{repo_name}` 与文件夹不一致")
         if id_problems:

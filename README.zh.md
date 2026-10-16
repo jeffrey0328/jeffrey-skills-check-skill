@@ -20,7 +20,7 @@
 ## 功能介绍
 
 - 管每个 skill 必须怎么写：创建或编辑时先按统一形态落盘，人类页和 Review 页一起齐。
-- 只有全局 skill 的文件夹、名字和 git 仓库名必须是 `jeffrey-<功能名>-skill`。Review 会把对不上的标成缺件。项目里的 skill 和系统 skill 不动。
+- 只有全局 skill 的文件夹、名字和 git 仓库名必须是 `jeffrey-<功能名>-skill`。Stride 相关 skill 用 `stride-` 前缀，例如 `stride-workbench`。Review 会把对不上的标成缺件。项目里的 skill 和系统 skill 不动。
 - 全局 skill 改名后，要在全局 skills、commands、rules 里改掉旧目录名。还指向已经不存在的 skill 目录，Review 会标成缺件。
 - 打开 Skills 总览和单个 skill 的 Review 页：总览先体检整套 skill；`/<skill> /skill-review` 只体检当前这一个。被标出的需关注/缺件可点「开对话」弹出预填对话（确认后才发送），需关注也可点「忽略」。
 - 在总览页按标签或类型（演进型 / 底本型）筛选，右键卡片改标签或改类型，保存即写入。
