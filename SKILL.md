@@ -12,7 +12,7 @@ description: >-
   Skills 总览, /skill-review, 体检, review 同步.
 ---
 
-# Skills check (hub)
+# 技能检查枢纽（Skills check (hub)）
 
 Thin control plane. **`/` and `@` paste this entire file** — keep routing-only. After attach: match intent → Read **one** `references/*.md` (Grep `^## ` → offset/limit if multi-section).
 
@@ -24,14 +24,14 @@ Thin control plane. **`/` and `@` paste this entire file** — keep routing-only
 | 2 Content | `references/` |
 | 3 Cases | `examples/` |
 
-## Commands
+## 命令（Commands）
 
 | Command | Action |
 |---------|--------|
 | *(none)* | Fleet preflight, then open the **all-skills overview** → `references/open-review.md` |
 | `/skill-review` (this skill in the user message) | This-skill preflight, then this skill’s Review page → `references/open-review.md` § Single |
 
-## Route (required)
+## 必经路由（Route (required)）
 
 | User intent | Read first |
 |-------------|------------|
@@ -43,7 +43,7 @@ Thin control plane. **`/` and `@` paste this entire file** — keep routing-only
 | Norms / DoD / where is file X? | `references/hub-norms.md` |
 | Editing/renaming/moving any references/scripts/examples file or `##` heading | `references/cross-reference.md` **first** |
 
-## Always (minimal)
+## 始终遵守的最低要求（Always (minimal)）
 
 - **Resident:** stay in effect the whole conversation.
 - **Authoring:** creating or editing any skill → read `references/skill-authoring.md` first (then that skill’s own `cross-reference.md`). Global skills only: folder, frontmatter `name`, and git repo name are `jeffrey-<function>-skill`. Do not apply that id to project skills or system skills. After a global skill rename, update the old directory name in global skills, commands, and rules.
