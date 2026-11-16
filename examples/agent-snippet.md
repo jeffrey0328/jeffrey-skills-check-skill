@@ -23,5 +23,5 @@
 ## Norms (example)
 
 - **Must**: Commands, paths, and type names match the repo; explore before writing; scoped Glob/Grep/Read on large trees; repeatable helpers → static under the skill + document when (`jeffrey-skills-check-skill/references/skill-authoring.md` § Prefer static).
-- **Must not** (each overlaps a Must above): Invent behavior; web search for repo facts unless allowed; whole-tree recursive scans when scoped tools suffice; reinvent the same skill helper as chat-only dynamic code every session.
-- **Pairing rule**: orphan Must not → rewrite as Must only (`jeffrey-skills-check-skill/references/skill-authoring.md` § Positive / negative norms).
+- **Must not** (a carve-out of a Must above whose range is too broad, so part of it needs excluding): Invent behavior; web search for repo facts unless allowed; whole-tree recursive scans when scoped tools suffice; reinvent the same skill helper as chat-only dynamic code every session.
+- **Affirmative first**: state the positive; add a negative only when the positive's range is too broad and part of it must be excluded. A negative with no positive containing it → rewrite as Must only (`jeffrey-skills-check-skill/references/skill-authoring.md` § Positive / negative norms).

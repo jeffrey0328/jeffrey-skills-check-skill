@@ -355,7 +355,7 @@ Applies to **Skill** `SKILL.md` / `references/` **and** project **Rules** (`AGEN
 
 **Prefer affirmative** imperatives (**Must** / **Do** / **When→Then**).
 
-**Must not / Do not / Never / 禁止 / 不要** may appear **only if** there is already a **positive** norm whose scope **contains or overlaps** that prohibition (same concern: what to do instead, or the allowed path). The negative sharpens the positive; it must not stand alone.
+Write a negative (**Must not / Do not / Never / 禁止 / 不要**) **only when** the affirmative's scope is too broad: it would also cover something that must be excluded, and that part needs saying. The negative is a carve-out inside a positive norm's scope (same concern: what to do instead, or the allowed path), so a **positive** norm that **contains or overlaps** it must already exist. The negative sharpens the positive; it must not stand alone.
 
 | OK | Not OK |
 |----|--------|
