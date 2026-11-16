@@ -5,6 +5,8 @@
   - 只约束全局 skill：文件夹、frontmatter `name`、git 仓库名都是 `jeffrey-<功能名>-skill`（功能名是 `aaa` 或 `aaa-bbb-ccc`）
   - Stride 相关 skill 的文件夹和 frontmatter name 用 `stride-` 前缀，例如 `stride-workbench`
   - 项目里的 skill 和系统 skill 不改名，Review 也不拿这条去查它们
+  - 叫法由 Jeffrey 说了算：创建时先问，只写在该 skill 自己 `SKILL.md` 的 `description` 里
+  - 文件语言：只有中文 README、Review 三页和 `tag.txt` 写中文，其余全部英文
   - 全局 skill 改名后，在全局 skills、commands、rules 里把旧目录名改成新名字；还指向已不存在目录的路径算缺件
   - 不要用具体 Agent 应用名，写成当前 Agent / Agent
 - **打开 Review**：

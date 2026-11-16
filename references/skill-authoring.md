@@ -236,6 +236,27 @@ Project skills (a skill that lives in a project, not in that default skills path
 
 **Must not:** Leave the old directory name in global skills, commands, or rules after the rename. *(← Must: update mentions after rename)*
 
+## Spoken names / 叫法 (required when creating)
+
+Every skill answers to the names Jeffrey actually says. This skill owns that rule for all skills.
+
+1. **Ask Jeffrey for the 叫法 first**, before writing the skill. Use the names he gives.
+2. **Record them only in the YAML `description` of that skill’s own `SKILL.md`.** Cursor matches skills from `description`, so every spoken name goes there; that lets a Chinese-only invoke load the skill. The body needs no separate names section.
+3. **To look up a skill’s 叫法, open the `description` in its `SKILL.md`.** Product `AGENTS.md` files and `.mdc` files point at the skill and leave the name catalog to `SKILL.md`.
+
+## Language (required)
+
+| File | Language |
+|------|----------|
+| `README.md` | English (GitHub default); top link to `README.zh.md` |
+| `README.zh.md` | Chinese (Jeffrey reads this one); top link to `README.md` |
+| `review-intro.md`, `review-body.md`, `review-usage.md`, `tag.txt` | Chinese (Feishu Review pages) |
+| Everything else: `SKILL.md`, `references/`, `examples/`, `AGENTS.md`, `DEVLOG.md`, headings, body | English |
+
+- The YAML `description` is English and also carries the skill’s spoken names (which may be Chinese) — § Spoken names.
+- Speak to Jeffrey in his language in conversation; the table above governs files only.
+- A product / project repo (not a skill) follows its own file rules in `jeffrey-agent-workflow-skill` § Projects.
+
 ## Auto-invocation decision (required when creating)
 
 Two **mechanisms** (configured differently; **both** must be explained to humans when used):

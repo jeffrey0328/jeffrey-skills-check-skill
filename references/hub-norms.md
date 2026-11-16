@@ -48,6 +48,7 @@
 - Keep this hub thin; long runbooks stay in `references/`.
 - Default open to the agent’s built-in browser (`open-review.md` § Browser).
 - **Every skill must have the companion files** (README pair, `review-intro.md` / `review-body.md` / `review-usage.md`, `tag.txt`, `kind.txt`). This skill is the only place that states the requirement — `skill-authoring.md` § File roles; other skills point here instead of restating it.
+- **叫法 and file language are decided here for every skill:** ask Jeffrey for the 叫法 first and record them only in that skill’s `SKILL.md` `description`; keep Chinese to the README pair’s Chinese file, the Review pages and `tag.txt`, and write everything else in English — `skill-authoring.md` § Spoken names / § Language.
 - Companion sync and Must-not pairing follow `skill-authoring.md`（README 两份 + Review 三页 + 不用具体 Agent 应用名）。
 - Global skills (direct children of the current app’s default skills path) use one id for the folder, frontmatter `name`, and origin repo name: `jeffrey-<function>-skill` (`aaa` or `aaa-bbb-ccc`). A Stride skill uses the `stride-` prefix instead, for example `stride-workbench`. `/skill-review` marks a mismatch 缺件. Project skills and system skills stay out of this rule — `skill-authoring.md` § Global skill id.
 - After a global skill rename, update the old directory name in global skills, commands, and rules. This skill’s Review marks a leftover path to a missing skill directory as 缺件.

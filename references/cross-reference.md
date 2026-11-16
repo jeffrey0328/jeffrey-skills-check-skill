@@ -50,6 +50,10 @@ Records **who references each tracked file** and whether the reference is to the
 |---------------|------|
 | `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Global skill id |
 | `hub-norms.md` Must「Every skill must have the companion files」| § File roles |
+| `hub-norms.md` Must「叫法 and file language are decided here」| § Spoken names + § Language |
+| `SKILL.md` Route「Create/update Skill」(叫法 / skill 语言 triggers) | § Spoken names + § Language |
+| sibling `jeffrey-agent-workflow-skill/SKILL.md` § Names + § Updating skills + § Projects | § Spoken names + § Language |
+| `skill-authoring.md` § Agent-app names / § File roles (README / Review language rows) | § Language |
 | sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` (Skill Structure row) | § File roles |
 | `hub-norms.md` File index + Must + DoD | 整篇 + § Global skill id |
 | `adopt-review.md` 读法 + § Checklist | 整篇 + § Three layers / § Synchronize / § Positive / negative |
