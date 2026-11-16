@@ -33,7 +33,7 @@
 | `review-ignored.json` | Local | 已忽略的需关注（检查 id + 原文；本机文件，不进 git） |
 | `examples/adopt-checklist.md` | Both | Adopt checklist |
 | `examples/three-layer-layout.md` | Both | Three-layer layout example |
-| `examples/agent-snippet.md` | Agent | Minimal new-skill template |
+| `examples/agent-snippet.md` | Agent | Wording example for a skill's Workflow and Norms |
 
 **Human entry:** `README.md` + `README.zh.md`（互相入口；简介 → 安装提示词 → 功能介绍 → 怎么用 → 常见改动 → 其他；英文页英文提示词、中文页中文提示词；内容部分只有这三节，不写 `何时` / `怎么调用` / 文件角色 / 目录清单表；**required**，缺一份或入口/顺序不对 = 缺件）+ Feishu Review：`review-intro.md` / `review-body.md` / `review-usage.md`。全文不要用具体 Agent 应用名，写成当前 Agent / Agent。细节：`skill-authoring.md` § README / § Install prompt / § Agent-app names。
 

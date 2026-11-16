@@ -102,12 +102,15 @@ Records **who references each tracked file** and whether the reference is to the
 | `SKILL.md` Layers 表 | 整篇 |
 | `adopt-review.md` § Checklist | 整篇 |
 | `hub-norms.md` File index | 整篇 |
+| `skill-authoring.md` § Thin hub / slash-attach budget (Reference layout line) | 整篇 |
+| `agent-snippet.md` | 指针 |
 
 ### agent-snippet.md
 | Referenced by | 范围 |
 |---------------|------|
 | `hub-norms.md` File index | 整篇 |
-| **Cites:** `skill-authoring.md` § Thin hub / § Three layers / § Review flags / § Prefer static / § Positive / negative norms; sibling `jeffrey-agent-workflow-skill/references/repo-exploration.md` | 指针 |
+| `skill-authoring.md` § Thin hub / slash-attach budget (Reference layout line) | 整篇 |
+| **Cites:** `skill-authoring.md` § Prefer static / § Positive / negative norms; `three-layer-layout.md`; sibling `jeffrey-agent-workflow-skill/references/repo-exploration.md` | 指针 |
 
 ## tag.txt
 | Referenced by | 范围 |

@@ -91,7 +91,7 @@ Applies to **every** Agent Skill created or materially reshaped under this workf
 4. Long reference files: top **读法** / when→which `##` table — see **Partial read** below.
 5. **Three layers:** hub indexes content + cases — § Three layers. Missing `examples/` or a stub-only examples dir is unfinished.
 
-Reference layout: this hub’s thin `SKILL.md` + `references/hub-norms.md`. Template: `examples/agent-snippet.md`.
+Reference layout: this hub’s thin `SKILL.md` + `references/hub-norms.md`. Layout example: `examples/three-layer-layout.md`. Wording example for Workflow / Norms: `examples/agent-snippet.md`.
 
 ## README at skill root (required)
 
