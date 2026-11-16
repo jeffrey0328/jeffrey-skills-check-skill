@@ -49,6 +49,8 @@ Records **who references each tracked file** and whether the reference is to the
 | Referenced by | 范围 |
 |---------------|------|
 | `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Global skill id |
+| `hub-norms.md` Must「Every skill must have the companion files」| § File roles |
+| sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` (Skill Structure row) | § File roles |
 | `hub-norms.md` File index + Must + DoD | 整篇 + § Global skill id |
 | `adopt-review.md` 读法 + § Checklist | 整篇 + § Three layers / § Synchronize / § Positive / negative |
 | `open-review.md` | 整篇 + § Global skill id |
@@ -99,6 +101,13 @@ Records **who references each tracked file** and whether the reference is to the
 |---------------|------|
 | `SKILL.md` Layers 表 | 整篇 |
 | `adopt-review.md` § Checklist | 整篇 |
+| `hub-norms.md` File index | 整篇 |
+
+### agent-snippet.md
+| Referenced by | 范围 |
+|---------------|------|
+| `hub-norms.md` File index | 整篇 |
+| **Cites:** `skill-authoring.md` § Thin hub / § Three layers / § Review flags / § Prefer static / § Positive / negative norms; sibling `jeffrey-agent-workflow-skill/references/repo-exploration.md` | 指针 |
 
 ## tag.txt
 | Referenced by | 范围 |

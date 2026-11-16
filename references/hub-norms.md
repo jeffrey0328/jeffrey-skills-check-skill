@@ -32,6 +32,8 @@
 | `/skill-review` (user commands) | Agent | Global command — alone = overview; with `/<skill>` = single |
 | `review-ignored.json` | Local | 已忽略的需关注（检查 id + 原文；本机文件，不进 git） |
 | `examples/adopt-checklist.md` | Both | Adopt checklist |
+| `examples/three-layer-layout.md` | Both | Three-layer layout example |
+| `examples/agent-snippet.md` | Agent | Minimal new-skill template |
 
 **Human entry:** `README.md` + `README.zh.md`（互相入口；简介 → 安装提示词 → 功能介绍 → 怎么用 → 常见改动 → 其他；英文页英文提示词、中文页中文提示词；内容部分只有这三节，不写 `何时` / `怎么调用` / 文件角色 / 目录清单表；**required**，缺一份或入口/顺序不对 = 缺件）+ Feishu Review：`review-intro.md` / `review-body.md` / `review-usage.md`。全文不要用具体 Agent 应用名，写成当前 Agent / Agent。细节：`skill-authoring.md` § README / § Install prompt / § Agent-app names。
 
@@ -45,6 +47,7 @@
 - **Check the 关联记录 before editing:** Read `cross-reference.md` first; update it after any cross-reference change.
 - Keep this hub thin; long runbooks stay in `references/`.
 - Default open to the agent’s built-in browser (`open-review.md` § Browser).
+- **Every skill must have the companion files** (README pair, `review-intro.md` / `review-body.md` / `review-usage.md`, `tag.txt`, `kind.txt`). This skill is the only place that states the requirement — `skill-authoring.md` § File roles; other skills point here instead of restating it.
 - Companion sync and Must-not pairing follow `skill-authoring.md`（README 两份 + Review 三页 + 不用具体 Agent 应用名）。
 - Global skills (direct children of the current app’s default skills path) use one id for the folder, frontmatter `name`, and origin repo name: `jeffrey-<function>-skill` (`aaa` or `aaa-bbb-ccc`). A Stride skill uses the `stride-` prefix instead, for example `stride-workbench`. `/skill-review` marks a mismatch 缺件. Project skills and system skills stay out of this rule — `skill-authoring.md` § Global skill id.
 - After a global skill rename, update the old directory name in global skills, commands, and rules. This skill’s Review marks a leftover path to a missing skill directory as 缺件.
@@ -55,7 +58,7 @@
 - Leave a global skill whose folder, frontmatter name, or origin repo name is not that same id. *(← Must: global skill id)*
 - Leave the old directory name in global skills, commands, or rules after a rename. *(← Must: update the old directory name)*
 - Stuff the adopt/sync playbooks into `SKILL.md`. *(← Must: keep this hub thin)*
-- Open overview via `/jeffrey-workflow-skill -reviewall`. *(← Must: overview is `/skill-review`)*
+- Open overview via a hub’s `-reviewall` flag. *(← Must: overview is `/skill-review`)*
 - Default-open Review in the external browser. *(← Must: built-in browser)*
 
 ## Definition of Done

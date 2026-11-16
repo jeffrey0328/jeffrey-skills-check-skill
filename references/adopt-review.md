@@ -93,6 +93,6 @@ Follow `skill-authoring.md` § Synchronize companion files and § Positive / neg
 
 ## Must not
 
-- Point `open-review.ps1` at `jeffrey-workflow-skill/scripts/skills-check-viewer.py`. *(← Must: viewer lives in this skill)*
+- Point `open-review.ps1` at a viewer outside `jeffrey-skills-check-skill`. *(← Must: viewer lives in this skill)*
 - Add `-reviewall` to the target skill. *(← Must: overview is `/skill-review`)*
 - List `/skill-review` / overview on the target skill’s `review-usage.md`. *(← Must: those stay on the agent hub / this skill’s Review page)*

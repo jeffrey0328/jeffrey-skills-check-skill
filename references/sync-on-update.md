@@ -16,7 +16,7 @@ Pure typo/format fixes with no Route / `description` / workflow change: skip com
 
 ## Domain skill update
 
-When you change a skill’s workflow, constraints, triggers, examples, or layout (typical `jeffrey-workflow-skill` authoring turn):
+When you change a skill’s workflow, constraints, triggers, examples, or layout (typical skill authoring turn):
 
 | Companion | Sync when |
 |-----------|-----------|
@@ -50,7 +50,7 @@ python "<jeffrey-skills-check-skill>/scripts/skills-check-viewer.py" --write-ope
 ```
 
 3. **If adopt / sync / open runbooks changed**, keep this skill’s own `review-intro.md` / `review-body.md` / `review-usage.md` / `README.md` / `README.zh.md` aligned (same companion rule as any other skill).
-4. **Point other hubs at the new paths** when you move a file: `jeffrey-workflow-skill` authoring docs, each skill’s `cross-reference.md` opener row, and `open-review.ps1`.
+4. **Point other hubs at the new paths** when you move a file: any other hub’s authoring docs, each skill’s `cross-reference.md` opener row, and `open-review.ps1`.
 
 ## New skill added to the fleet
 

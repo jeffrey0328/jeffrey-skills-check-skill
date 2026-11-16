@@ -55,7 +55,7 @@ If in-scope skills already pass the must-adapt list, skip writes and continue to
 **Docs split:**
 
 - **Every** skill: `/skill-review` in **`SKILL.md`** Commands (Agent). With that skill named in the same message → that skill’s page.
-- **Overview entry:** global command **`/skill-review`** (alone). `/jeffrey-skills-check-skill` with no extra skill name is the same overview. Do not keep `-reviewall` on `jeffrey-workflow-skill` or any other hub.
+- **Overview entry:** global command **`/skill-review`** (alone). `/jeffrey-skills-check-skill` with no extra skill name is the same overview. Do not keep `-reviewall` on any other hub.
 - **Feishu Review「怎么用」:** list the overview command **only** on **this** skill (`review-usage.md`). Other skills do not list `/skill-review` / overview on their Review page.
 
 ## Browser
@@ -164,7 +164,7 @@ Violations of the pairing rule are **需关注**, not 缺件. A missing README f
 - Put `description` 原文 or a script inventory on「怎么用」. *(← Must: 怎么用 = what the person types / says / clicks)*
 - List overview / `/skill-review` on other skills’ Feishu Review pages. *(← Must: overview only on this skill’s Review)*
 - Open the Review page in the external browser by default. *(← Must: default to built-in browser)*
-- Keep or revive `-reviewall` on `jeffrey-workflow-skill`. *(← Must: overview is `/skill-review`)*
+- Keep or revive `-reviewall` on any hub. *(← Must: overview is `/skill-review`)*
 - Open Review while an **in-scope** skill still fails the must-adapt list. *(← Must: Preflight first)*
 - On `/<skill> /skill-review`, adapt or block on sibling skills. *(← Must: single-page preflight is that skill only)*
 - Treat resident auto-attach as the skill named for `/skill-review`. *(← Must: detect `/` `@` from the user message)*

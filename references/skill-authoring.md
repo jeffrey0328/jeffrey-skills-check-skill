@@ -1,6 +1,6 @@
 # Agent Skill authoring workflow
 
-Read this when **creating or updating** any Agent Skill. This file is the skill-shape spec for **`jeffrey-skills-check-skill`**. For large-repo exploration, also read **`jeffrey-workflow-skill/references/repo-exploration.md`**. Human Review: overview `/skill-review`; single page `/<skill> /skill-review`. Adopt / sync: `adopt-review.md` and `sync-on-update.md` in this skill.
+Read this when **creating or updating** any Agent Skill. This file is the skill-shape spec for **`jeffrey-skills-check-skill`**. For large-repo exploration, also read **`jeffrey-agent-workflow-skill/references/repo-exploration.md`**. Human Review: overview `/skill-review`; single page `/<skill> /skill-review`. Adopt / sync: `adopt-review.md` and `sync-on-update.md` in this skill.
 
 ## Exploration checklist (required)
 
@@ -19,6 +19,8 @@ Write only from what you read. Prefer repo-local facts; use **web search** only 
 **Large repos**: follow **`repo-exploration.md`**—scoped tools; no whole-tree recursive scans.
 
 ## File roles (canonical)
+
+**Every skill must carry these companion files.** This skill owns the requirement; no other skill restates it. `/skill-review` marks a missing companion 缺件, and § Synchronize companion files on create/update keeps them aligned.
 
 | Path | Audience | Role |
 |------|----------|------|
@@ -71,7 +73,7 @@ Authoring check: new repeatable automation → ship static + when as the documen
 
 ## Thin hub / slash-attach budget (required when creating **any** skill)
 
-Applies to **every** Agent Skill created or materially reshaped under this workflow — not only `jeffrey-workflow-skill`.
+Applies to **every** Agent Skill created or materially reshaped under this workflow — not only `jeffrey-skills-check-skill`.
 
 **Product fact:** `/skill-name` and `@skill-name` paste the **entire** hub `SKILL.md` into that user turn. Agents cannot lazy-load the pasted body. Description-only auto-attach (no slash) lists the skill without pasting the hub.
 
@@ -257,7 +259,7 @@ Skill frontmatter = control plane. Review tells the person how they invoke the s
 
 Invoke path belongs in `## 使用方法` as one sentence. Never paste the frontmatter `description` onto Review.
 
-Defaults if unanswered: **ask** — do not guess. Current set: **`jeffrey-workflow-skill`** → **常驻 / 默认**（description）；**`jeffrey-ue-dev-skill`**（UE 唯一入口，域内容在其 `modules/`）→ **条件自动**（`AGENTS.md` + `disable-model-invocation: true`）；**`jeffrey-skills-check-skill`** → **常驻 / 默认**（description：创建/编辑 skill 先读本规范；总览打开前适配当前 agent 默认 skills 路径下的全部 skill；`/<skill> /skill-review` 只检查当前这一个；其他 skill 本轮被改时同步人类页）。
+Defaults if unanswered: **ask** — do not guess. Current set: **`jeffrey-agent-workflow-skill`** → **常驻 / 默认**（description）；**`jeffrey-ue-dev-skill`**（UE 唯一入口，域内容在其 `modules/`）→ **条件自动**（`AGENTS.md` + `disable-model-invocation: true`）；**`jeffrey-skills-check-skill`** → **常驻 / 默认**（description：创建/编辑 skill 先读本规范；总览打开前适配当前 agent 默认 skills 路径下的全部 skill；`/<skill> /skill-review` 只检查当前这一个；其他 skill 本轮被改时同步人类页）。
 
 ## Review flags
 
@@ -349,7 +351,7 @@ On update, change `kind.txt` only when the user asks to switch type.
 
 ## Positive / negative norms (Skills **and** Rules)
 
-Applies to **Skill** `SKILL.md` / `references/` **and** project **Rules** (`AGENTS.md`, satellites, `.mdc`). Same rule in **`jeffrey-workflow-skill/references/project-rules.md`** § Writing norms.
+Applies to **Skill** `SKILL.md` / `references/` **and** project **Rules** (`AGENTS.md`, satellites, `.mdc`). Same rule in **`jeffrey-agent-workflow-skill/references/project-rules.md`** § Writing norms.
 
 **Prefer affirmative** imperatives (**Must** / **Do** / **When→Then**).
 

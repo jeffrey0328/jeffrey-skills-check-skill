@@ -46,7 +46,7 @@ SKIP_DIRS = {"logs", "scripts", ".git"}
 LEGACY_SECTION_IDS = ("can-do", "steps", "contents", "examples")
 AUTO_INVOKE_OK = {
     "jeffrey-user-profile-skill",
-    "jeffrey-workflow-skill",
+    "jeffrey-agent-workflow-skill",
     "jeffrey-video-creator-skill",
     "jeffrey-skills-check-skill",
 }
