@@ -19,7 +19,7 @@
 
 ## 功能介绍
 
-- 管每个 skill 必须怎么写：创建或编辑时先按统一形态落盘，人类页和 Review 页一起齐。
+- 管每个 skill 必须怎么写：创建或编辑时先按统一形态落盘，人类页和 Review 页一起齐。每次更新 skill，都要核对中英文 README 是否还对得上，需要就一起改。
 - 只有全局 skill 的文件夹、名字和 git 仓库名必须是 `jeffrey-<功能名>-skill`。Stride 相关 skill 用 `stride-` 前缀，例如 `stride-workbench`。Review 会把对不上的标成缺件。项目里的 skill 和系统 skill 不动。
 - 每个 skill 的叫法由 Jeffrey 说了算：创建时先问叫法，只写在该 skill 自己 `SKILL.md` 的 `description` 里。
 - 文件语言：只有中文 README 和 Review 三页（以及 `tag.txt`）写中文，其余全部英文；英文 `README.md` 保留给 GitHub 默认显示。

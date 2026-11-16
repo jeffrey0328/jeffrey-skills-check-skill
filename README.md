@@ -19,7 +19,7 @@ Steps:
 
 ## Features
 
-- Keeps every skill in the same shape: when one is created or edited, the agent writes it to the shared form and keeps the human pages and Review pages in sync.
+- Keeps every skill in the same shape: when one is created or edited, the agent writes it to the shared form and keeps the human pages and Review pages in sync. After every skill update the agent checks whether both READMEs still match and updates them when they do not.
 - Global skills use one id, `jeffrey-<function>-skill`, for the folder, the skill name, and the git repo. Review flags a mismatch. A Stride skill uses the `stride-` prefix instead, for example `stride-workbench`. Project skills and system skills are left alone.
 - Each skill’s spoken names (叫法) come from Jeffrey: the agent asks for them when a skill is created and records them only in the `description` of that skill’s own `SKILL.md`.
 - File language: Chinese only in the Chinese README, the three Review pages and `tag.txt`; everything else is English. The English `README.md` stays because GitHub shows it by default.

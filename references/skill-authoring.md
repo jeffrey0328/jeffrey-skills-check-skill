@@ -392,7 +392,7 @@ Authoring / update check: every new or touched Must not has an explicit paired M
 
 ## Synchronize companion files on create/update
 
-After changing workflow, constraints, triggers, examples, or layout, check:
+After **every** skill update (any change to `SKILL.md`, `references/`, `scripts/`, `examples/`, or the layout), check whether `README.md` and `README.zh.md` still describe the skill, and update both when they do not. A typo fix needs only the check. Then check the rest:
 
 - **`README.md`**: English; `[中文](README.zh.md)` after the title; order 简介 → `## Install` → `## Features` → `## How to use` → `## Common changes` → 其他. Install = one **English** agent prompt (git URL + Steps). No `When` / `How to invoke` H2, no file-roles table. See § README at skill root + § Install prompt.
 - **`README.zh.md`**: Chinese; `[English](README.md)` after the title; same order with `## 安装` and the **Chinese** prompt, then 功能介绍 / 怎么用 / 常见改动. Same facts as `README.md`.
