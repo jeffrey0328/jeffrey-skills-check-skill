@@ -55,6 +55,8 @@ Records **who references each tracked file** and whether the reference is to the
 | sibling `jeffrey-agent-workflow-skill/SKILL.md` § Names + § Updating skills + § Projects | § Spoken names + § Language |
 | `skill-authoring.md` § Agent-app names / § File roles (README / Review language rows) | § Language |
 | sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` (Skill Structure row) | § File roles |
+| sibling `jeffrey-agent-workflow-skill/SKILL.md` § Agent-specific spec index + `references/rule-vs-skill.md` § Where agent-specific content lives | § Agent-app names › Agent-specific spec file |
+| `scripts/skills-check-viewer.py` (agent-app-name check skips root `*-spec.md`) | § Agent-app names › Agent-specific spec file |
 | `hub-norms.md` File index + Must + DoD | 整篇 + § Global skill id |
 | `adopt-review.md` 读法 + § Checklist | 整篇 + § Three layers / § Synchronize / § Positive / negative |
 | `open-review.md` | 整篇 + § Global skill id |

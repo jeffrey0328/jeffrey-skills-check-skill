@@ -33,6 +33,7 @@ Write only from what you read. Prefer repo-local facts; use **web search** only 
 | `review-usage.md` | Human | Feishu Review **使用方法** (one sentence) + **功能** — what a person types / says / clicks. No `description` dump, no `scripts/*` inventory |
 | `tag.txt` | Human / Review | Display tags |
 | `kind.txt` | Human / Review | Skill type: one line `演进` or `底本` (chip **演进型** / **底本型**) |
+| `<agent>-spec.md` | Agent | Optional, **only on that agent app's branch** of the skill repo: the part only that app understands. Indexed from `SKILL.md` by the naming rule alone — see § Agent-specific spec file |
 | `examples/` | Both | Layer-3 cases (see **Three layers**) |
 | `scripts/` | Agent / local | Bound to flags / SKILL actions — not listed under Review「怎么用」 |
 
@@ -200,15 +201,26 @@ Chinese (`README.zh.md`):
 
 ## Agent-app names (forbidden)
 
-Do **not** use a specific agent app name. Write **the current agent app**, **Agent**, or **the agent**. This applies **anywhere** in a skill (hub, README, review-*, references, examples, scripts, templates, agents, tools, filenames).
+Do **not** use a specific agent app name or a specific project name. Write **the current agent app**, **Agent**, or **the agent**; for a project write a placeholder such as `<Project>` or `<Plugin>`. This applies **anywhere** in a skill (hub, README, review-*, references, examples, scripts, templates, agents, tools, filenames).
 
-Forbidden names (any capitalization or spacing): Cursor, Claude Code, ClaudeCode, Codex, WorkBuddy, Trae, CodeBuddy — including those names inside paths and filenames.
+Forbidden names (any capitalization or spacing): Cursor, Claude, Claude Code, ClaudeCode, Codex, Gemini, Antigravity, Copilot, WorkBuddy, Trae, CodeBuddy — including those names inside paths and filenames (a file or directory named after an agent, such as that agent's own instruction file or config directory, counts).
 
-**Must:** discover the current app’s skills path from this skill’s location or from that app’s spec; never hard-code an agent app directory.
+The ban covers **every** agent app and **every** project, not only the names in the list above. The list is what the checker matches; a project name has no list and is judged by reading.
 
-**Must not:** Use a specific agent app name or that app’s path. *(← Must: agent-agnostic wording)*
+**Must:** discover the current app’s skills path from this skill’s location or from that app’s spec; never hard-code an agent app directory. Refer to an agent-specific file as “the agent-specific adapter / rule file”; the agent finds its real name in its own spec.
+
+**Must not:** Use a specific agent app name, that app’s path, or a specific project name. *(← Must: agent-agnostic wording, placeholders for projects)*
 
 The install prompt says「某一个 Agent 产品」, not an agent app name.
+
+### Agent-specific spec file (the one exception)
+
+A skill repo can be referenced by several agent apps (each app's skills parent repo pins it). The part only one agent app understands lives on that app's own **branch** of the skill repo (named `agent/<agent>`, not `<agent>` alone, because a remote may already hold `<agent>/...` branches and git cannot hold both), as **one file in the skill folder root**, and nowhere else.
+
+- **Naming rule:** `<agent>-spec.md`, where `<agent>` is the lowercase agent app name (one lowercase word, no spaces). It is the only file in a skill where an agent app name may appear, in its name and in its text.
+- **Index:** `SKILL.md` on the default branch carries one line that states only this naming rule (`<agent>-spec.md` in this folder; read the one for the current agent app if it exists). It names no agent and does not describe the file.
+- **Where it exists:** only on that agent's branch. The default branch holds no `*-spec.md`. Files the spec needs (scripts, examples) go on the same branch; rules that belong to that part go on it too.
+- The checker skips root files matching `*-spec.md` in the agent-app-name check.
 
 This section is the ban list (needed so the checker can name what is forbidden). CSS `cursor:` in stylesheets is the CSS property, not an agent app name. A git host (`origin.cursor.com`, `cursor.com`), a hyphenated command or record id (`/push-cursor`, `cursor-config`), a git remote name written as a code span or after `add ` / `-u `, or a protocol prompt deeplink (`cursor://…`), is a host/CLI identifier, not an agent app name.
 
@@ -400,7 +412,7 @@ After **every** skill update (any change to `SKILL.md`, `references/`, `scripts/
 - **`review-intro.md`**: Chinese one-line/paragraph 简介（纯文本，无 Markdown 标记）。
 - **`review-body.md`**: Chinese `## 能做什么`（页面标题 **功能描述**：功能本身、规则、细节；不写命令、不写执行步骤、不写人类页）/ `## 执行步骤`（执行规范：每一步干什么；页面最下；相关度低才拆项；每项 `- **标签**：` 下用子列表，不要写成一段；每项都有对应 `###`，一步也写；加粗仅条目标签；见上表）。
 - **`review-usage.md`**: `## 使用方法` = 一句话怎么调用（常驻 / `@` / 关键词，见 § Language）；`## 功能` + `### <能做什么标题>` + `####` 命令/参数/脚本/工具；**overview command only on `jeffrey-skills-check-skill`’s Review page** (other skills: agent `SKILL.md` `/skill-review` only — see **Review flags**); no agent-only script list, no `## description 内容`; same bold rule as body.
-- **Wording:** do not use a specific agent app name. Write **the current agent app**, **Agent**, or **the agent** — § Agent-app names.
+- **Wording:** do not use a specific agent app name or a specific project name. Write **the current agent app**, **Agent**, or **the agent**; a project is a placeholder — § Agent-app names.
 - **`tag.txt`**: one-line display tag (see **Tag** above).
 - **`kind.txt`**: one line `演进` or `底本` (see **Skill kind** above). Write on create; change only when the user asks.
 - Human Review = Feishu + `review-intro.md` + `review-body.md` + `review-usage.md` (see **Positive / negative norms**).
