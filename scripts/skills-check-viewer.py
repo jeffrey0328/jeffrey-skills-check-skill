@@ -1835,6 +1835,9 @@ def check_skill(folder: Path) -> dict:
         if skip_dir & set(p.parts):
             continue
         rel = str(p.relative_to(folder)).replace("\\", "/")
+        # skill-authoring.md § Agent-specific spec file: root <agent>-spec.md may name its agent.
+        if re.fullmatch(r"[a-z0-9]+-spec\.md", rel):
+            continue
         if p.name.startswith("_strip-") or p.name in {
             "review-ignored.json",
             "review-ignored.json.tmp",

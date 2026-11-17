@@ -8,7 +8,7 @@
   - 叫法由 Jeffrey 说了算：创建时先问，只写在该 skill 自己 `SKILL.md` 的 `description` 里
   - 文件语言：只有中文 README、Review 三页和 `tag.txt` 写中文，其余全部英文
   - 全局 skill 改名后，在全局 skills、commands、rules 里把旧目录名改成新名字；还指向已不存在目录的路径算缺件
-  - 不要用具体 Agent 应用名，写成当前 Agent / Agent
+  - 不要用具体 Agent 应用名，写成当前 Agent / Agent；唯一例外是某个 Agent 分支上的专属文件 `<agent>-spec.md`（小写 agent 名，只在该 Agent 的分支上有，主干 `SKILL.md` 里只写这条命名规则作为索引）
 - **打开 Review**：
   - 两种页面：Skills 总览，和单个 skill 的 Review
   - 总览体检并适配当前 Agent 默认 skills 路径下的全部 skill；单页只体检、只补这一个
