@@ -53,6 +53,11 @@ SKIP_FILE_NAMES = {"local.md", "local.example.md"}
 # Standard install locations and documented product defaults are generic, not
 # machine-local: Program Files paths, and Unreal Remote Control API port 30010.
 DEFAULT_PORTS = {"30010"}
+# /home/box is the documented shared-agent-host alias (product AGENTS.md uses
+# it as a fixed convention), not a per-machine secret.
+DOCUMENTED_HOME_ALIASES = {"/home/box"}
+# A cited path explicitly marked conditional is not a broken pointer.
+OPTIONAL_PATH = re.compile(r"有的话|if present|if it exists", re.I)
 # Historical logs record past file names, paths, and wording — exempt from
 # language, pointer, and hygiene checks (they are records, not live guidance).
 LOG_FILES = {"DEVLOG.md", "changelog.md", "error-log.md"}
@@ -176,6 +181,8 @@ def check_links(report: Report, root: Path, path: Path, rel: str):
             target = m.group(1)
             if "*" in target:
                 continue
+            if OPTIONAL_PATH.search(line):
+                continue
             if re.search(r"`(?:jeffrey-[a-z0-9-]+-skill|stride-[a-z0-9-]+)`", line):
                 continue  # cross-skill citation — resolved by the agent, not this tree
             if not (root / target).exists() and not (path.parent / target).exists():
@@ -194,6 +201,8 @@ def check_hygiene(report: Report, path: Path, rel: str):
                 if label == "drive-letter path" and re.search(r"Program Files", line, re.I):
                     continue
                 if label == "local port" and snippet.rsplit(":", 1)[-1] in DEFAULT_PORTS:
+                    continue
+                if label == "user home path" and snippet in DOCUMENTED_HOME_ALIASES:
                     continue
                 report.review("machine-local", f"possible {label}: {snippet!r} — confirm or move to local.md", rel, i)
         if path.suffix == ".md" and not NAME_EXCEPTION.search(line):
