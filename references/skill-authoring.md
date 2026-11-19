@@ -257,6 +257,7 @@ Every skill answers to the names Jeffrey actually says. This skill owns that rul
 
 - The YAML `description` is English and also carries the skill’s spoken names (which may be Chinese) — § Spoken names.
 - Speak to Jeffrey in his language in conversation; the table above governs files only.
+- A language violation is **must-fix** at both depths: the quick check (before use) and the full check (before update) both verify this table — `agent-check.md` § Depth.
 - A product / project repo (not a skill) follows its own file rules in `jeffrey-agent-workflow-skill` § Projects.
 
 ## Auto-invocation decision (required when creating)

@@ -23,10 +23,11 @@ A project’s **governance files** are created and maintained per the current ag
 | Required-skill gates | Every must-load skill named in `AGENTS.md` exists and is loadable in the current app |
 | Pointers | All file/skill pointers resolve; no leftover path to a renamed skill |
 | Human pages | Chinese `README.md` describes the project; `DEVLOG.md` reflects current progress |
+| File language | `README.md` and `DEVLOG.md` Chinese; every other governance file English — `jeffrey-agent-workflow-skill` § Projects |
 | Writing norms | Positive/negative pairing per `skill-authoring.md` § Positive / negative norms; no machine-local values in committed files |
 | Freshness | Rules that cite code paths/symbols still match the code (verify before relying) |
 
-Quick check (before use): required-skill gates loadable, pointers resolve, no machine-local values, `AGENTS.md` startup order readable.
+Quick check (before use): required-skill gates loadable, pointers resolve, no machine-local values, `AGENTS.md` startup order readable, file language per § Check list (Chinese `README.md`/`DEVLOG.md`, everything else English).
 
 ## Must
 
