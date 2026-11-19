@@ -10,8 +10,8 @@
 │   └── cross-reference.md   # 关联记录
 ├── examples/                # 3 Cases — worked example or case-index.md
 │   └── case-index.md
-├── README.md
-├── README.zh.md
+├── README.md                # Chinese default human page
+├── README-EN.md             # English companion
 ├── kind.txt                 # rewrite policy: 演进 / 底本
 ├── scripts/                 # tools / code — only if Commands need them
 └── tools/

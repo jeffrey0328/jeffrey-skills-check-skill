@@ -12,6 +12,7 @@ A project’s **governance files** are created and maintained per the current ag
 | `.agents/` + agent adapter files | Only content that one agent alone needs; layout per `project-rules.md` §1.0 and `rule-vs-skill.md` § Where agent-specific content lives |
 | `.mdc` rules | Format and gate per `project-rules.md` § 2–3 |
 | `README.md` | Chinese; says what the project is for (not a progress dump) — `jeffrey-agent-workflow-skill` § Projects |
+| `README-EN.md` | English companion of `README.md`, same facts, links both ways — same section |
 | `DEVLOG.md` | Chinese 开发日志; current progress, updated whenever progress changes — same section |
 | Skill pointers | Every pointer resolves to an existing skill; spoken-name catalog stays in each skill’s `description`, not duplicated in rules |
 
@@ -22,12 +23,12 @@ A project’s **governance files** are created and maintained per the current ag
 | Layout | `AGENTS.md` neutral + `.agents/` for agent-only content, per `project-rules.md` |
 | Required-skill gates | Every must-load skill named in `AGENTS.md` exists and is loadable in the current app |
 | Pointers | All file/skill pointers resolve; no leftover path to a renamed skill |
-| Human pages | Chinese `README.md` describes the project; `DEVLOG.md` reflects current progress |
-| File language | `README.md` and `DEVLOG.md` Chinese; every other governance file English — `jeffrey-agent-workflow-skill` § Projects |
+| Human pages | Chinese `README.md` describes the project; English `README-EN.md` companion present, links both ways; `DEVLOG.md` reflects current progress |
+| File language | `README.md` and `DEVLOG.md` Chinese; `README-EN.md` English; every other governance file English — `jeffrey-agent-workflow-skill` § Projects |
 | Writing norms | Positive/negative pairing per `skill-authoring.md` § Positive / negative norms; no machine-local values in committed files |
 | Freshness | Rules that cite code paths/symbols still match the code (verify before relying) |
 
-Quick check (before use): required-skill gates loadable, pointers resolve, no machine-local values, `AGENTS.md` startup order readable, file language per § Check list (Chinese `README.md`/`DEVLOG.md`, everything else English).
+Quick check (before use): required-skill gates loadable, pointers resolve, no machine-local values, `AGENTS.md` startup order readable, file language per § Check list (Chinese `README.md`/`DEVLOG.md`, English `README-EN.md`, everything else English).
 
 ## Must
 

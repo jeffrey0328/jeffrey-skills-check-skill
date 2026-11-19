@@ -8,7 +8,7 @@ Records **who references each tracked file** and whether the reference is to the
 
 - **Before editing** any file listed below (rename, move, delete, or rename/remove a `##` / `§` heading that appears in the 范围 column), **read this record first** and update every listed referencer.
 - **After editing**, keep this record in sync.
-- **Scope of tracking:** all `references/*.md`, `examples/*`, and `kind.txt`. `SKILL.md` / `README.md` / `README.zh.md` appear as **referencers** only.
+- **Scope of tracking:** all `references/*.md`, `examples/*`, `scripts/*`, and `kind.txt`. `SKILL.md` / `README.md` / `README-EN.md` appear as **referencers** only.
 
 ## references/
 
@@ -94,6 +94,16 @@ Records **who references each tracked file** and whether the reference is to the
 | Referenced by | 范围 |
 |---------------|------|
 | `SKILL.md` Route「Norms/DoD」+ Always | 整篇 |
+
+## scripts/
+
+### run_agent_check.py
+| Referenced by | 范围 |
+|---------------|------|
+| `agent-check.md` § Flow + § Must | 整篇（script-first gate） |
+| `hub-norms.md` File index + § Must | 整篇 |
+| `preferences.md` § Working style | 整篇 |
+| `README.md` / `README-EN.md` 功能介绍 + 常见改动 | 整篇 |
 
 ## examples/
 

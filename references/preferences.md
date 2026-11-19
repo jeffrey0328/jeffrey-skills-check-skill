@@ -12,7 +12,7 @@ The second half of the check standard (the first half is the current agent app�
 
 ## Skill shape & language
 
-- Agent-facing artifacts in English; a bilingual README pair (`README.md` English, `README.zh.md` Chinese) carrying the same facts, links both ways. Chinese belongs only in `README.zh.md`; conversation with Jeffrey is in Chinese.
+- Agent-facing artifacts in English; a bilingual README pair everywhere (`README.md` Chinese default, `README-EN.md` English) carrying the same facts, links both ways. Chinese belongs in `README.md` and a project's `DEVLOG.md`; conversation with Jeffrey is in Chinese.
 - `SKILL.md` stays a thin routing hub; detail in English `references/`, user-facing explanation in the READMEs.
 - 叫法: ask Jeffrey first; record only in that skill’s `description`.
 - Rewrite policy per skill (`kind.txt`, one line): `演进` — the agent may improve it from observed use, with a documented update loop and the 更新标准 / 更新依据 / 更新条目 brief after each agent-driven update; `底本` — no spontaneous rewrite, updates only from Jeffrey’s direct command or a cited source change. This skill is `底本`.
@@ -23,6 +23,7 @@ The second half of the check standard (the first half is the current agent app�
 - Feedback and reports describe every change or gap by its content and purpose in plain language, never by bare file name — Jeffrey does not memorize file roles. A file path may follow as a trailing hint, never as the subject of the finding.
 - One conversation does one thing (or a few related things); clearly unrelated input goes to a new chat.
 - Edit the original in place — update the existing passage, or add at the fitting place; never append to the end by default.
+- Checks that can be scripted run through the fixed script in the owning skill's `scripts/` (the content gate: `jeffrey-agent-check-skill/scripts/run_agent_check.py`) — never re-write throwaway check code each run. When a new repeatable check is discovered, add it to that script's proper home.
 - After every skill update, tell Jeffrey what changed and ask whether to push; commit and push only after he agrees. A push command he typed himself already counts as agreement.
 - Decisions that are Jeffrey’s get asked before execution; execution makes no decisions (`jeffrey-agent-workflow-skill` § Workflow).
 
@@ -35,7 +36,7 @@ The second half of the check standard (the first half is the current agent app�
 ## Product & UI taste
 
 - No helper captions or process-restating microcopy unless Jeffrey asks; follow `jeffrey-web-dev-skill` hub-norms for web UI.
-- Projects keep a Chinese `README.md` (what the project is for) and a Chinese `DEVLOG.md` (current progress), updated on every project change.
+- Projects keep a Chinese `README.md` (what the project is for) with an English `README-EN.md` companion, and a Chinese `DEVLOG.md` (current progress), updated on every project change.
 
 ## Adding a preference
 

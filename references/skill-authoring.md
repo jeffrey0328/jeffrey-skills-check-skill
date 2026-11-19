@@ -27,8 +27,8 @@ Write only from what you read. Prefer repo-local facts; use **web search** only 
 | `SKILL.md` | Agent | **Thin** English hub: routing + Commands (+ few always-on bullets) |
 | `references/` | Agent | Long workflows, full Must/Must-not, DoD, file indexes — **read on demand** |
 | `references/cross-reference.md` | Agent | 关联记录 — who references each tracked file (whole/§); read before editing, update after |
-| `README.md` | Human | English README — **required**; link to `README.zh.md` |
-| `README.zh.md` | Human | Chinese README — **required**; link to `README.md` |
+| `README.md` | Human | Chinese README — **required**, the default human page; link to `README-EN.md` |
+| `README-EN.md` | Human | English README — **required**; link to `README.md` |
 | `kind.txt` | Agent | Rewrite policy: one line `演进` or `底本` — § Skill kind |
 | `<agent>-spec.md` | Agent | Optional, **only on that agent app's branch** of the skill repo: the part only that app understands. Indexed from `SKILL.md` by the naming rule alone — see § Agent-specific spec file |
 | `examples/` | Both | Layer-3 cases (see **Three layers**) |
@@ -62,7 +62,7 @@ When a skill workflow would **dynamically write code** (ad-hoc Shell that grows 
 
 1. **Add** the asset under the skill that owns the workflow: `scripts/` (runnable, bound to a Command/flag), `examples/` (templates to adapt), or `references/` (documented snippets).
 2. **Document when to use**: Commands / Route row, and/or a short **When** in the script header or the matched `references/*.md` section.
-3. **Sync companions** if humans need the new action (`README.md` + `README.zh.md`) — same as § Synchronize companion files.
+3. **Sync companions** if humans need the new action (`README.md` + `README-EN.md`) — same as § Synchronize companion files.
 4. Tell the user what was added and the **when** trigger.
 
 **Must not:** Re-invent the same helper as chat-only dynamic code every session when it belongs in that skill. *(← Must: prefer static + document when)*
@@ -97,15 +97,15 @@ Every skill **must** have **two** root README files. Both are **required compani
 
 | File | Language | Entry to the other (first line after the `#` title) |
 |------|----------|-----------------------------------------------------|
-| `README.md` | English | `[中文](README.zh.md)` |
-| `README.zh.md` | Chinese | `[English](README.md)` |
+| `README.md` | Chinese (default) | `[English](README-EN.md)` |
+| `README-EN.md` | English | `[中文](README.md)` |
 
 The two files cover the **same facts**. Do not keep a bilingual single file.
 
 **Section order** (both files, same sequence):
 
 1. **简介** — untitled prose right after the language link. One short paragraph: what the skill is.
-2. **安装方法** — first H2: English `## Install` / Chinese `## 安装`. One short line: install **through the current agent**. Then **one fenced prompt** in **that file’s language** (`README.md` English, `README.zh.md` Chinese). The prompt **must** include the git URL and the install steps. Do **not** give a human `git clone` command. Extra install-only notes (e.g. `-setupproject`) may follow the fence, still inside this H2.
+2. **安装方法** — first H2: Chinese `## 安装` / English `## Install`. One short line: install **through the current agent**. Then **one fenced prompt** in **that file’s language** (`README.md` Chinese, `README-EN.md` English). The prompt **must** include the git URL and the install steps. Do **not** give a human `git clone` command. Extra install-only notes (e.g. `-setupproject`) may follow the fence, still inside this H2.
 3. **具体内容介绍** — **exactly three** H2s, all written for **the person using the skill**: what it can do, how to use it, then how to change it. English: `## Features`, `## How to use`, `## Common changes`. Chinese: `## 功能介绍`, `## 怎么用`, `## 常见改动`. Nothing else belongs in this block.
 4. **其他内容** — extras that are not install and not those three (e.g. Privacy).
 
@@ -124,7 +124,7 @@ The two files cover the **same facts**. Do not keep a bilingual single file.
 | 想改什么 / What to change | The user-visible knob: this skill’s norms, its checking standards, its templates, its data store, its output paths, its triggers |
 | 对 Agent 说 / Say to the agent | One sentence a person can paste. The agent locates the file itself |
 
-Cover every knob a user actually wants to turn in that skill. Name a file only as a trailing hint after the intent, never as the row key. Write the say-to-the-agent sentence in **that README’s language** (English in `README.md`, Chinese in `README.zh.md`).
+Cover every knob a user actually wants to turn in that skill. Name a file only as a trailing hint after the intent, never as the row key. Write the say-to-the-agent sentence in **that README’s language** (Chinese in `README.md`, English in `README-EN.md`).
 
 **Must not:** Add any other H2 to 具体内容介绍 — no `When` / `何时`, no `How to invoke` / `怎么调用`, no `What it does` / `做什么`, no file-roles / file-inventory / layout table (`File roles`, `文件角色`, `Layout`, `目录`). One-line purpose stays in the 简介 paragraph; capabilities go in `功能介绍`; trigger timing goes in `怎么用`; file roles are agent-facing (§ File roles + the skill’s `references/hub-norms.md` File index). *(← Must: 具体内容 = 功能介绍 + 怎么用 + 常见改动)*
 
@@ -139,8 +139,8 @@ Include at minimum (split across those four blocks):
 **Language**
 
 - `SKILL.md`: **English** default (agent control plane).
-- `README.md`: English human page — **required companion** (missing, no link to `README.zh.md`, or wrong section order = must-fix).
-- `README.zh.md`: Chinese human page — **required companion** (missing, no link to `README.md`, or wrong section order = must-fix).
+- `README.md`: Chinese human page, the default — **required companion** (missing, no link to `README-EN.md`, or wrong section order = must-fix).
+- `README-EN.md`: English human page — **required companion** (missing, no link to `README.md`, or wrong section order = must-fix).
 
 ## Install prompt (required)
 
@@ -152,22 +152,11 @@ The prompt **must** include:
 2. The git URL (`Repo:` / `仓库：https://…/*.git`).
 3. Numbered **Steps** / **步骤**: first read **this** agent app’s skill spec; then clone into that app’s default skills path (folder name = skill name); then adapt only the bind points. Paths come from that spec.
 
-English intro + English prompt in `README.md`. Chinese intro + Chinese prompt in `README.zh.md`. Same facts; do **not** paste the Chinese block into `README.md`.
+Chinese intro + Chinese prompt in `README.md`. English intro + English prompt in `README-EN.md`. Same facts; do **not** paste the English block into `README.md`.
 
 Fill `<name>` and `<repo.git>`.
 
-English (`README.md`):
-
-```
-Install the skill "<name>" into the agent app you are currently running in.
-Repo: https://github.com/<owner>/<repo>.git
-Steps:
-1. First read and follow this agent app's current skill spec (install directory, frontmatter, how skills are attached, project pointers, human-page requirements). Do not edit files until that spec is read. Do not apply another agent product's paths or fields from memory.
-2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "<name>".
-3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/ or examples/.
-```
-
-Chinese (`README.zh.md`):
+Chinese (`README.md`):
 
 ```
 请把 skill「<name>」安装到你当前所在的 Agent 应用。
@@ -178,9 +167,20 @@ Chinese (`README.zh.md`):
 3. 再按该规范改本 skill 里需要对接到当前 Agent 的部分。不要通读 references/、examples/ 里的流程正文。
 ```
 
-**Must:** `README.md` uses the English prompt; `README.zh.md` uses the Chinese prompt (git URL + steps + spec first).
+English (`README-EN.md`):
 
-**Must not:** Put a human `git clone` command in Install, put a Chinese prompt in `README.md`, or start installing before the current agent’s spec is read. *(← Must: one agent prompt per language; spec first)*
+```
+Install the skill "<name>" into the agent app you are currently running in.
+Repo: https://github.com/<owner>/<repo>.git
+Steps:
+1. First read and follow this agent app's current skill spec (install directory, frontmatter, how skills are attached, project pointers, human-page requirements). Do not edit files until that spec is read. Do not apply another agent product's paths or fields from memory.
+2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "<name>".
+3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/ or examples/.
+```
+
+**Must:** `README.md` uses the Chinese prompt; `README-EN.md` uses the English prompt (git URL + steps + spec first).
+
+**Must not:** Put a human `git clone` command in Install, put an English prompt in `README.md`, or start installing before the current agent’s spec is read. *(← Must: one agent prompt per language; spec first)*
 
 ## Agent-app names (forbidden)
 
@@ -251,8 +251,8 @@ Every skill answers to the names Jeffrey actually says. This skill owns that rul
 
 | File | Language |
 |------|----------|
-| `README.md` | English (GitHub default); top link to `README.zh.md` |
-| `README.zh.md` | Chinese (Jeffrey reads this one); top link to `README.md` |
+| `README.md` | Chinese (default human page); top link to `README-EN.md` |
+| `README-EN.md` | English; top link to `README.md` |
 | Everything else: `SKILL.md`, `references/`, `examples/`, headings, body | English |
 
 - The YAML `description` is English and also carries the skill’s spoken names (which may be Chinese) — § Spoken names.
@@ -343,10 +343,10 @@ Do not add a learn-from-runs or agent-driven rewrite loop. Source-change updates
 
 ## Synchronize companion files on create/update
 
-After **every** skill update (any change to `SKILL.md`, `references/`, `scripts/`, `examples/`, or the layout), check whether `README.md` and `README.zh.md` still describe the skill, and update both when they do not. A typo fix needs only the check. Then check the rest:
+After **every** skill update (any change to `SKILL.md`, `references/`, `scripts/`, `examples/`, or the layout), check whether `README.md` and `README-EN.md` still describe the skill, and update both when they do not. A typo fix needs only the check. Then check the rest:
 
-- **`README.md`**: English; `[中文](README.zh.md)` after the title; order 简介 → `## Install` → `## Features` → `## How to use` → `## Common changes` → 其他. Install = one **English** agent prompt (git URL + Steps). No `When` / `How to invoke` H2, no file-roles table. See § README at skill root + § Install prompt.
-- **`README.zh.md`**: Chinese; `[English](README.md)` after the title; same order with `## 安装` and the **Chinese** prompt, then 功能介绍 / 怎么用 / 常见改动. Same facts as `README.md`.
+- **`README.md`**: Chinese; `[English](README-EN.md)` after the title; order 简介 → `## 安装` → `## 功能介绍` → `## 怎么用` → `## 常见改动` → 其他. Install = one **Chinese** agent prompt (git URL + 步骤). No `When` / `How to invoke` H2, no file-roles table. See § README at skill root + § Install prompt.
+- **`README-EN.md`**: English; `[中文](README.md)` after the title; same order with `## Install` and the **English** prompt, then Features / How to use / Common changes. Same facts as `README.md`.
 - **`常见改动` rows**: if this change added or moved a knob a user would ask to change (norms, checking standards, data store, output paths, triggers), update the row in **both** READMEs.
 - **Wording:** do not use a specific agent app name or a specific project name. Write **the current agent app**, **Agent**, or **the agent**; a project is a placeholder — § Agent-app names.
 - **`kind.txt`**: one line `演进` or `底本` (see **Skill kind** above). Write on create; change only when the user asks.
@@ -381,4 +381,4 @@ Skip only for pure typo/format fixes with no Route/`description`/workflow change
 
 If this write was an agent-driven update to a **演进型** skill (observed use / pitfall / implementation, not a user command that already stated the exact change), also include **更新标准 / 更新依据 / 更新条目** — § Skill kind.
 
-If a companion file needs no change, say why in the summary. Meaningful skill changes should keep `SKILL.md`, `README.md`, `README.zh.md`, `examples/`, and `references/` aligned in substance.
+If a companion file needs no change, say why in the summary. Meaningful skill changes should keep `SKILL.md`, `README.md`, `README-EN.md`, `examples/`, and `references/` aligned in substance.
