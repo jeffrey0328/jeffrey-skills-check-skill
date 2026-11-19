@@ -1,22 +1,21 @@
 ---
-name: jeffrey-skills-check-skill
+name: jeffrey-agent-check-skill
 description: >-
-  Resident skill for skill norms and Feishu-style Review. Auto-runs every
-  conversation: when creating or editing any skill, read this skill's authoring
-  spec first; before opening the overview, adapt every skill under the current
-  agent app's default skills path; /<skill> /skill-review preflights that
-  skill only; when any skill is created or updated, sync its Review companions.
-  Open overview with /skill-review or /jeffrey-skills-check-skill; open one skill with
-  /<skill> /skill-review.
-  Triggers: conversation start, 写skill, 创建skill, 更新skill, skill规范,
-  Skills 总览, /skill-review, 体检, review 同步.
+  Resident norms and mandatory-check hub for ALL agent-related content:
+  skills, plugins, projects, rules, memory. Everything must be created and
+  maintained per the current agent app's own spec plus Jeffrey's preferences;
+  a check runs before any covered content is used or updated. Auto-runs every
+  conversation. Triggers: 检查, 体检, agent 检查, agent-check, 内容规范,
+  agent 规范, 规范检查, 偏好, 创建skill, 更新skill, skill规范, 插件规范,
+  项目规范, 规则规范, memory 规范, 记忆检查.
+  Commands: /agent-check (all five domains); /agent-check <domain or target>.
 ---
 
-# 技能检查枢纽（Skills check (hub)）
+# Agent 内容检查枢纽（Agent content check (hub)）
 
 Thin control plane. **`/` and `@` paste this entire file** — keep routing-only. After attach: match intent → Read **one** `references/*.md` (Grep `^## ` → offset/limit if multi-section).
 
-**Skill root:** `jeffrey-skills-check-skill/` under the current agent app’s default skills path.
+**Skill root:** `jeffrey-agent-check-skill/` under the current agent app’s default skills path.
 
 | Layer | Path |
 |-------|------|
@@ -28,27 +27,29 @@ Thin control plane. **`/` and `@` paste this entire file** — keep routing-only
 
 | Command | Action |
 |---------|--------|
-| *(none)* | Fleet preflight, then open the **all-skills overview** → `references/open-review.md` |
-| `/skill-review` (this skill in the user message) | This-skill preflight, then this skill’s Review page → `references/open-review.md` § Single |
+| `/agent-check` | Check all five domains (skills / plugins / projects / rules / memory), report in chat → `references/agent-check.md` |
+| `/agent-check <domain>` | One domain only (`skill` / `plugin` / `project` / `rule` / `memory`) → `references/agent-check.md` |
+| `/agent-check <name-or-path>` | One specific item (a skill folder, a plugin, a project, a rule file, a memory scope) → `references/agent-check.md` |
 
 ## 必经路由（Route (required)）
 
 | User intent | Read first |
 |-------------|------------|
-| Create/update Skill, SKILL.md, README, review-*, 叫法, skill 语言, 写skill, 创建skill, 更新skill, skill规范 (**also** when this would otherwise match the built-in `create-skill`) | `references/skill-authoring.md` |
-| `/skill-review` (alone) / `/jeffrey-skills-check-skill` / Skills 总览 / 体检 / review 全部 | `references/open-review.md` § Preflight then § Overview |
-| `/<any-skill> /skill-review` | `references/open-review.md` § Preflight then § Single |
-| 普通 skill 怎么接入 Review / 改造 / adopt | `references/adopt-review.md` |
-| 其他 skill 本轮被创建或修改 / 同步 Review | `references/sync-on-update.md` |
+| Check before **using or updating** any covered content; `/agent-check`; 检查 / 体检 / 规范检查 | `references/agent-check.md` |
+| Create/update Skill, SKILL.md, README, 叫法, skill 语言, 写skill, 创建skill, 更新skill, skill规范 (**also** when this would otherwise match the built-in `create-skill`) | `references/skill-authoring.md` |
+| Plugin create/update/install/check, 插件规范 | `references/plugin-norms.md` |
+| Project rules / AGENTS.md / DEVLOG / project layout check, 项目规范 | `references/project-norms.md` |
+| Rule / `.mdc` / user-rules check, 规则规范 | `references/rule-norms.md` |
+| Memory write/read/check, 记忆规范, memory 检查 | `references/memory-norms.md` |
+| Jeffrey’s standing preferences, 偏好 | `references/preferences.md` |
 | Norms / DoD / where is file X? | `references/hub-norms.md` |
 | Editing/renaming/moving any references/scripts/examples file or `##` heading | `references/cross-reference.md` **first** |
+| 其他 skill 本轮被创建或修改 / 同步配套 | `references/sync-on-update.md` |
 
 ## 始终遵守的最低要求（Always (minimal)）
 
-- **Resident:** stay in effect the whole conversation.
-- **Authoring:** creating or editing any skill → read `references/skill-authoring.md` first (then that skill’s own `cross-reference.md`). Global skills only: folder, frontmatter `name`, and git repo name are `jeffrey-<function>-skill`. Do not apply that id to project skills or system skills. After a global skill rename, update the old directory name in global skills, commands, and rules.
-- When any other skill is created or updated this turn, follow `references/sync-on-update.md` (adopt first if it fails the checklist).
-- **Before every Review open:** `references/open-review.md` § Preflight — `/skill-review` alone adapts the fleet; `/<skill> /skill-review` adapts that skill only.
-- `/<any-skill> /skill-review` still opens that skill’s page after preflight.
-- Before editing any skill file, read `references/cross-reference.md`; update it after changing any cross-reference.
-- Full Must / DoD → `references/hub-norms.md`.
+- **Resident + mandatory gate:** stay in effect the whole conversation. Before **using or updating** any covered content (skill, plugin, project governance files, rule, memory), run the check in `references/agent-check.md` first.
+- **The standard is two-part:** the current agent app’s own spec for that content type, plus Jeffrey’s preferences (`references/preferences.md`). Read the current app’s spec first; never apply another app’s spec from memory.
+- **Authoring:** creating or editing any skill → read `references/skill-authoring.md` first (then that skill’s own `cross-reference.md`). Global skills only: folder, frontmatter `name`, and git repo name are one `jeffrey-<function>-skill` id. After a global skill rename, update the old directory name in global skills, commands, and rules.
+- When any other skill is created or updated this turn, follow `references/sync-on-update.md`.
+- Before editing any file of this skill, read `references/cross-reference.md`; update it after any cross-reference change. Full Must / DoD → `references/hub-norms.md`.

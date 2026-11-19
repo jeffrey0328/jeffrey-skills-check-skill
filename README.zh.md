@@ -1,43 +1,44 @@
-# jeffrey-skills-check-skill
+# jeffrey-agent-check-skill
 
 [English](README.md)
 
-技能形态规范，以及当前 Agent 默认 skills 路径下的飞书风格 Review。它让每个 skill 保持同一种形态，并给你一个页面看清哪些 skill 健康、哪些缺件。
+Agent 相关内容的规范与强制检查枢纽，覆盖五个域：skill、插件、项目（治理文件）、规则、memory。所有内容都按两条标准创建和维护：当前 Agent 应用自己对该类内容的规范，加上 Jeffrey 的固定偏好。任何被覆盖的内容在使用前、更新前都要先过检查；结果在对话里报告（没有 Review 页面）。
 
 ## 安装
 
 通过 Agent 安装。把下面代码块整段交给当前 Agent。
 
 ```
-请把 skill「jeffrey-skills-check-skill」安装到你当前所在的 Agent 应用。
-仓库：https://github.com/jeffrey0328/jeffrey-skills-check-skill.git
+请把 skill「jeffrey-agent-check-skill」安装到你当前所在的 Agent 应用。
+仓库：https://github.com/jeffrey0328/jeffrey-agent-check-skill.git
 步骤：
 1. 先读取并遵守你当前这个 Agent 的 skill 规范（安装目录、frontmatter、挂载方式、项目指针、人类页要求）。未读到该规范之前不要改文件。不要凭记忆套用某一个 Agent 产品的路径和字段。
-2. 按该规范把该仓库克隆到当前 Agent 的默认 skills 路径，文件夹名用「jeffrey-skills-check-skill」。
-3. 再按该规范改本 skill 里需要对接到当前 Agent 的部分。不要通读 references/、review-body.md、examples/ 里的流程正文。
+2. 按该规范把该仓库克隆到当前 Agent 的默认 skills 路径，文件夹名用「jeffrey-agent-check-skill」。
+3. 再按该规范改本 skill 里需要对接到当前 Agent 的部分。不要通读 references/、examples/ 里的流程正文。
 ```
 
 ## 功能介绍
 
-- 管每个 skill 必须怎么写：创建或编辑时先按统一形态落盘，人类页和 Review 页一起齐。每次更新 skill，都要核对中英文 README 是否还对得上，需要就一起改。
-- 只有全局 skill 的文件夹、名字和 git 仓库名必须是 `jeffrey-<功能名>-skill`。Stride 相关 skill 用 `stride-` 前缀，例如 `stride-workbench`。Review 会把对不上的标成缺件。项目里的 skill 和系统 skill 不动。
-- 每个 skill 的叫法由 Jeffrey 说了算：创建时先问叫法，只写在该 skill 自己 `SKILL.md` 的 `description` 里。
-- 文件语言：只有中文 README 和 Review 三页（以及 `tag.txt`）写中文，其余全部英文；英文 `README.md` 保留给 GitHub 默认显示。
-- 全局 skill 改名后，要在全局 skills、commands、rules 里改掉旧目录名。还指向已经不存在的 skill 目录，Review 会标成缺件。
-- 打开 Skills 总览和单个 skill 的 Review 页：总览先体检整套 skill；`/<skill> /skill-review` 只体检当前这一个。被标出的需关注/缺件可点「开对话」弹出预填对话（确认后才发送），需关注也可点「忽略」。
-- 在总览页按标签或类型（演进型 / 底本型）筛选，右键卡片改标签或改类型，保存即写入。
-- 给还没接入 Review 的 skill 补齐配套文件和它自己的 `/skill-review`。
+- 覆盖五个域：skill、插件、项目（治理文件）、规则、memory，每个域有自己的规范和检查清单，统一按当前 Agent 的规范 + Jeffrey 的偏好来衡量。
+- 强制检查门：被覆盖的内容使用前先快查，创建或更新前先全查。必须修的问题先修再继续；偏好层面的问题列出来给 Jeffrey 定。
+- `/agent-check` 检查全部五个域并在对话里报告；也可以只查一个域或一个具体对象。
+- 管每个 skill 必须怎么写：薄路由枢纽、三层结构、中英文 README 一对、叫法由 Jeffrey 定、全局 skill 的文件夹/名字/仓库名同一个 `jeffrey-<功能名>-skill` id，改名后清理旧名引用。
+- 每个 Agent 特定的设置保留自己的分支：只有某个 Agent 才需要的内容放在它自己的 `agent/<agent>` 分支的 `<agent>-spec.md` 里，不进共用的默认分支；每次更新 skill 都做这个适配拆分。
+- Jeffrey 的固定偏好记在一页里；新说出的偏好就地写入，并检查已有内容有没有冲突。
+- 常驻同步：同一轮里其他 skill 被创建或修改时，结束前核对并补齐它的配套文件。
 
 ## 怎么用
 
-**常驻** —— 每轮对话 Agent 自己会挂载，不需要你 `@`。只要有 skill 被创建或修改（Agent 动手前先读编写规范），或者你想看 skill 的状态，它就会生效。仍然可以说 `/skill-review`、`/jeffrey-skills-check-skill` 或 `@jeffrey-skills-check-skill`。
+**常驻** —— 每轮对话 Agent 自己会挂载，不需要你 `@`。只要被覆盖的内容要被使用或更新，或者你要求检查，它就会生效。仍然可以说 `/jeffrey-agent-check-skill` 或 `@jeffrey-agent-check-skill`。
 
 | 你说 | 会发生什么 |
 |------|------------|
-| `/skill-review` | 先体检全部 skill，再打开 Skills 总览（按类型或标签筛选，右键卡片改标签或改演进型 / 底本型） |
-| `/<任一 skill> /skill-review` | 只体检那一个 skill，再打开它的页面 |
-| 「建一个 skill 做…」/「改一下这个 skill」 | Agent 按形态规范写，并同步给人看的页面 |
-| 「把 `<skill>` 接入 Review」 | 给那个 skill 补齐配套文件和它自己的 `/skill-review` |
+| `/agent-check` | 检查 skill、插件、项目、规则、memory，按域在对话里报告 |
+| `/agent-check skill`（或 `plugin` / `project` / `rule` / `memory`） | 只查这一个域 |
+| `/agent-check <名字或路径>` | 只查一个具体的 skill、插件、项目、规则文件或 memory 范围 |
+| 「建一个 skill 做…」/「改一下这个 skill」 | Agent 先读编写规范、做更新前检查，按统一形态落盘并同步 README |
+| 「检查这个插件符不符合规范」 | 按插件规范检查并报告 |
+| 「以后我偏好…」 | 偏好就地写入偏好页，列出冲突的内容 |
 
 ## 常见改动
 
@@ -46,13 +47,8 @@
 | 想改什么 | 对 Agent 说 |
 |----------|-------------|
 | skill 编写规范（任何 skill 必须怎么写） | 「改一下 skill 编写规范：`<新要求>`，并铺开到每个 skill」 |
-| Review 检查标准（什么算缺件、什么算需关注） | 「Review 体检加一条：`<规则>`，算缺件 / 需关注」 |
-| 某个 skill 的 Review 页内容（简介 / 能做什么 / 使用方法） | 「把 `<skill>` 的 Review 简介改成 `<内容>`」 |
-| Review「能做什么」排版 | 「能做什么写成一条一条的，不要一段」 |
-| Review「功能描述」和「执行步骤」怎么分工 | 「功能描述写功能本身和规则细节，执行步骤写每一步干什么，命令和步骤里有的不要再写一遍」 |
-| skill 卡片上显示的标签 | 在总览页右键那张卡片选「编辑标签」直接改；或说「把 `<skill>` 的标签改成 `<标签>`」 |
-| skill 的类型（演进型 / 底本型） | 在总览页右键选「标为演进型」或「标为底本型」；或说「把 `<skill>` 改成底本型」 |
-| 标签词表里的候选标签 | 「标签词表加上 `<标签>`，把 `<旧标签>` 去掉」 |
-| Review 用哪里打开（内置 / 外部浏览器、端口） | 「Review 用外部浏览器打开」/「Review 换成 `<端口>` 端口」 |
-| 单独打开某个 skill 的 Review 时也体检全部 | 「/skill-review 打开单页时也先检查全部 skill」 |
+| 某个域的检查标准（插件 / 项目 / 规则 / memory） | 「`<域>` 规范加一条检查：`<规则>`，算必须修」 |
+| 检查的时机和深度 | 「使用前也查一下 `<项目>`」/「快查加上 `<项目>`」 |
+| 一条固定偏好 | 「以后我偏好 `<偏好>`」——写入偏好页，冲突的内容列出来 |
+| 覆盖哪些内容类型 | 「把 `<内容类型>` 也纳入检查」 |
 | 一条要全套 skill 一起遵守的约定（配套文件、hub 形态） | 「`<新约定>`，全部 skill 都改，不只这一个」 |

@@ -8,7 +8,7 @@ Records **who references each tracked file** and whether the reference is to the
 
 - **Before editing** any file listed below (rename, move, delete, or rename/remove a `##` / `§` heading that appears in the 范围 column), **read this record first** and update every listed referencer.
 - **After editing**, keep this record in sync.
-- **Scope of tracking:** all `references/*.md`, `scripts/*`, `examples/*`, `tag.txt`, and `kind.txt`. `SKILL.md` / `README.md` / `README.zh.md` / `review-*.md` appear as **referencers** only.
+- **Scope of tracking:** all `references/*.md`, `examples/*`, and `kind.txt`. `SKILL.md` / `README.md` / `README.zh.md` appear as **referencers** only.
 
 ## references/
 
@@ -17,137 +17,102 @@ Records **who references each tracked file** and whether the reference is to the
 |---------------|------|
 | `SKILL.md` Route「Editing…」+ Always | 整篇 |
 | `hub-norms.md` (top table + File index + Must + DoD) | 整篇 |
+| `skill-authoring.md` § Exploration checklist | 整篇 |
 
-### open-review.md
+### agent-check.md
 | Referenced by | 范围 |
 |---------------|------|
-| `SKILL.md` Commands + Route「总览 / /skill-review」+ Always | § Preflight / § Overview / § Single |
-| `hub-norms.md` File index + Must | 整篇 + § Preflight |
-| `review-body.md` 能做什么 · 打开 Review | § Preflight / § Overview / § Single / § Views Chat hook |
-| `adopt-review.md` Verify | § Single |
-| `sync-on-update.md` After sync | 整篇 |
-| global command `/skill-review` | 整篇（分流 overview / single） |
-
-### adopt-review.md
-| Referenced by | 范围 |
-|---------------|------|
-| `SKILL.md` Route「接入 / 改造」| 整篇 |
-| `open-review.md` § Preflight | § Fleet adapt |
-| `hub-norms.md` File index + Must | 整篇 |
-| `review-body.md` 执行步骤 · 接入 Review | 整篇 |
-| `sync-on-update.md` § New skill | 整篇 |
-| `examples/adopt-checklist.md` | 整篇 |
-
-### sync-on-update.md
-| Referenced by | 范围 |
-|---------------|------|
-| `SKILL.md` Route「本轮被创建或修改」+ Always「Resident」| § Resident + 整篇 |
-| `hub-norms.md` File index + Must | 整篇 |
-| `review-body.md` 能做什么 · 接入 Review | 整篇 |
+| `SKILL.md` Commands + Route「Check before using or updating」+ Always | 整篇 + § When / § Depth |
+| `hub-norms.md` File index + Must + DoD | 整篇 |
+| `skill-authoring.md` header + § File roles + § Positive / negative norms | 整篇（gate） |
+| `plugin-norms.md` / `project-norms.md` / `rule-norms.md` / `memory-norms.md` headers + check lists | § Depth / § Flow |
+| `sync-on-update.md` § Resident | 整篇（full depth） |
 
 ### skill-authoring.md
 | Referenced by | 范围 |
 |---------------|------|
-| `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Global skill id |
-| `hub-norms.md` Must「Every skill must have the companion files」| § File roles |
-| `hub-norms.md` Must「叫法 and file language are decided here」| § Spoken names + § Language |
-| `SKILL.md` Route「Create/update Skill」(叫法 / skill 语言 triggers) | § Spoken names + § Language |
-| sibling `jeffrey-agent-workflow-skill/SKILL.md` § Names + § Updating skills + § Projects | § Spoken names + § Language |
-| `skill-authoring.md` § Agent-app names / § File roles (README / Review language rows) | § Language |
-| sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` (Skill Structure row) | § File roles |
-| sibling `jeffrey-agent-workflow-skill/SKILL.md` § Agent-specific spec index + `references/rule-vs-skill.md` § Where agent-specific content lives | § Agent-app names › Agent-specific spec file |
-| `scripts/skills-check-viewer.py` (agent-app-name check skips root `*-spec.md`) | § Agent-app names › Agent-specific spec file |
-| `hub-norms.md` File index + Must + DoD | 整篇 + § Global skill id |
-| `adopt-review.md` 读法 + § Checklist | 整篇 + § Three layers / § Synchronize / § Positive / negative |
-| `open-review.md` | 整篇 + § Global skill id |
-| `sync-on-update.md` | § Synchronize companion files |
-| `review-body.md` 能做什么 / 执行步骤 | 整篇 |
+| `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| 整篇 + § Install prompt + § Global skill id + § Agent-specific spec file |
+| `hub-norms.md` File index + Must + DoD | 整篇 + § File roles / § Spoken names / § Language / § Global skill id / § Agent-specific spec file |
+| `agent-check.md` § Domains | 整篇 |
+| `plugin-norms.md` § Structure | § Agent-app names + 整篇（bundled skills） |
+| `project-norms.md` § Check list | § Positive / negative norms |
+| `rule-norms.md` § Which home + § Check list | § Agent-specific spec file + § Positive / negative norms |
+| `preferences.md` § Skill shape & language | § Skill kind |
+| `sync-on-update.md` § Resident + § Companion sync | § Agent-specific spec file + § Synchronize companion files |
+| sibling `jeffrey-agent-workflow-skill/SKILL.md` § Updating skills + § Projects | § Spoken names + § Language |
+| sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` (Skill Structure row + § Where agent-specific content lives) | § File roles + § Agent-specific spec file |
+| sibling `jeffrey-agent-config-skill` references (authoring pointer) | 整篇 |
+| sibling `jeffrey-ue-dev-skill` (authoring pointer) | 整篇 |
 | `examples/three-layer-layout.md` | § Three layers |
-| `scripts/skills-check-viewer.py` | § Three layers / § Positive / negative norms / § Skill kind |
+| `examples/agent-snippet.md` | § Prefer static / § Positive / negative norms |
+
+### plugin-norms.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「Plugin」| 整篇 |
+| `hub-norms.md` File index | 整篇 |
+| `agent-check.md` § Covered content + § Domains | 整篇 |
+
+### project-norms.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「Project」| 整篇 |
+| `hub-norms.md` File index | 整篇 |
+| `agent-check.md` § Covered content + § Domains | 整篇 |
+
+### rule-norms.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「Rule」| 整篇 |
+| `hub-norms.md` File index | 整篇 |
+| `agent-check.md` § Covered content + § Domains | 整篇 |
+
+### memory-norms.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「Memory」| 整篇 |
+| `hub-norms.md` File index | 整篇 |
+| `agent-check.md` § Covered content + § Domains | 整篇 |
+
+### preferences.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「preferences」+ Always | 整篇 |
+| `hub-norms.md` File index + Must | 整篇 |
+| `agent-check.md` § Depth + § Flow + § Cross-domain | 整篇 |
+| `plugin-norms.md` / `project-norms.md` / `rule-norms.md` / `memory-norms.md` headers | 整篇 |
+
+### sync-on-update.md
+| Referenced by | 范围 |
+|---------------|------|
+| `SKILL.md` Route「本轮被创建或修改」+ Always | 整篇 |
+| `hub-norms.md` File index + Must | 整篇 |
+| `skill-authoring.md` header | 整篇 |
 
 ### hub-norms.md
 | Referenced by | 范围 |
 |---------------|------|
 | `SKILL.md` Route「Norms/DoD」+ Always | 整篇 |
 
-## scripts/
-
-### skills-check-viewer.py
-| Referenced by | 范围 |
-|---------------|------|
-| `SKILL.md` (via `open-review.md`) | 调用 (整篇) |
-| `open-review.md` § Overview / § Single / § Ensure | 调用 (整篇) |
-| `adopt-review.md` § Generate opener | 调用 (`--write-open-scripts`) |
-| `sync-on-update.md` § Review skill update | 调用 (整篇) |
-| `scripts/open-review.ps1` | 调用 (整篇) |
-| **Parses:** each skill’s `review-intro.md`, `review-body.md`, `review-usage.md`, `tag.txt`, `kind.txt`, `SKILL.md`, `README.md`, `README.zh.md` | 解析 |
-| **Generates:** each skill’s `scripts/open-review.ps1` | 生成 |
-| **Writes (`POST /api/tag`):** each skill’s `tag.txt` + this skill’s `tag-vocab.txt` | 写入 |
-| **Writes (`POST /api/kind`):** each skill’s `kind.txt` | 写入 |
-| **Writes (`POST /api/ignore`):** this skill’s `review-ignored.json` | 写入 |
-| **Opens (`POST /api/prompt-deeplink`):** prompt deeplink 预填对话 | 打开 |
-
-### open-review.ps1
-| Referenced by | 范围 |
-|---------------|------|
-| `SKILL.md` `/skill-review` | 调用 (整篇) |
-| `open-review.md` § Single | 调用 (整篇) |
-| Generated/overwritten by `skills-check-viewer.py --write-open-scripts` | 被生成 |
-
 ## examples/
-
-### adopt-checklist.md
-| Referenced by | 范围 |
-|---------------|------|
-| `hub-norms.md` File index | 整篇 |
-| `adopt-review.md` | 整篇 |
 
 ### three-layer-layout.md
 | Referenced by | 范围 |
 |---------------|------|
 | `SKILL.md` Layers 表 | 整篇 |
-| `adopt-review.md` § Checklist | 整篇 |
 | `hub-norms.md` File index | 整篇 |
 | `skill-authoring.md` § Thin hub / slash-attach budget (Reference layout line) | 整篇 |
-| `agent-snippet.md` | 指针 |
 
 ### agent-snippet.md
 | Referenced by | 范围 |
 |---------------|------|
 | `hub-norms.md` File index | 整篇 |
 | `skill-authoring.md` § Thin hub / slash-attach budget (Reference layout line) | 整篇 |
-| **Cites:** `skill-authoring.md` § Prefer static / § Positive / negative norms; `three-layer-layout.md`; sibling `jeffrey-agent-workflow-skill/references/repo-exploration.md` | 指针 |
-
-## tag.txt
-| Referenced by | 范围 |
-|---------------|------|
-| `scripts/skills-check-viewer.py` | 解析 + 写入 (整篇) |
-| `hub-norms.md` File index | 整篇 |
-| `skill-authoring.md` § Tag | 整篇 |
+| **Cites:** `skill-authoring.md` § Prefer static / § Positive / negative norms; sibling `jeffrey-agent-workflow-skill/references/repo-exploration.md` | 指针 |
 
 ## kind.txt
 | Referenced by | 范围 |
 |---------------|------|
-| `scripts/skills-check-viewer.py` | 解析 + 写入 (`POST /api/kind`) |
+| `skill-authoring.md` § Skill kind + § File roles + § Synchronize companion files | 整篇 |
 | `hub-norms.md` File index | 整篇 |
-| `skill-authoring.md` § Skill kind | 整篇 |
-| `open-review.md` § Preflight + § Views (Kind hook) + § Health | 整篇 |
-| `adopt-review.md` § Checklist + § Fleet adapt | 整篇 |
-| `sync-on-update.md` § Domain skill update | 整篇 |
-
-## tag-vocab.txt
-| Referenced by | 范围 |
-|---------------|------|
-| `scripts/skills-check-viewer.py` | 读取 + 追加 (整篇) |
-| `skill-authoring.md` § Tag | 整篇 |
-| `hub-norms.md` File index | 整篇 |
-| `open-review.md` § Views (Tag hook) | 整篇 |
-| `open-review.md` § Views (Kind hook) | `kind.txt` 同行约定 |
-| `open-review.md` § Views (Chat hook) | 预填对话 |
-
-## review-ignored.json
-| Referenced by | 范围 |
-|---------------|------|
-| `scripts/skills-check-viewer.py` | 读取 + 写入 (整篇) |
-| `hub-norms.md` File index | 整篇 |
-| `open-review.md` § Views (Ignore hook) | 整篇 |
+| `preferences.md` § Skill shape & language | 整篇 |
