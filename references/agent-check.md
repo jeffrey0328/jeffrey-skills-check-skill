@@ -24,7 +24,7 @@ Every covered content type is created and maintained to **two standards**: the *
 
 | Depth | When | What it covers |
 |-------|------|----------------|
-| **Quick** | before use | Structure present (required files/fields), id/name consistency, pointers resolve to existing files/skills, no machine-local values in committed content, bind points match the current agent app, file language matches the domain norms (skill: English except the README pair; project: Chinese `README.md`/`DEVLOG.md`, everything else English) |
+| **Quick** | before use | Structure present (required files/fields), id/name consistency, pointers resolve to existing files/skills, no machine-local values in committed content, bind points match the current agent app, file language matches the domain norms (skill: English except the README pair; project: Chinese `README.md`/`DEVLOG.md`, English `README-EN.md` companion, everything else English) |
 | **Full** | before update; `/agent-check` | Everything in Quick + the domain norms file’s full checklist + `preferences.md` + (skills) the current app’s skill-spec conformance and the agent-specific split (`skill-authoring.md` § Agent-specific spec file) |
 
 A check reads the current app’s spec for that content type first (the same spec the skill Install prompt reads). Never check against another app’s spec from memory.
@@ -33,7 +33,7 @@ A check reads the current app’s spec for that content type first (the same spe
 
 1. Resolve the target(s): one item, one domain, or all five. Skills root = the current agent app’s default personal-skills path; skip non-skill dirs (`logs`, `scripts`, `.git`, dot-names).
 2. Read the matched norms file(s) — one per domain, partial-read by `##` when long. Read `preferences.md` once per full check.
-3. Run the checks at the required depth. Verify claims against the files as they are now (a memory or a rule may be stale).
+3. Run the checks at the required depth. **Script first:** run `python scripts/run_agent_check.py --depth quick|full [--json] [target …]` (this skill's `scripts/`) for the scriptable checks — structure, id, pointers, machine-local values, file language, README pair shape. The agent judges the script's `review` findings and everything it does not cover. When a new repeatable check is discovered, add it to this script (or the owning skill's `scripts/` for domain-specific checks) instead of writing chat-only code. Verify claims against the files as they are now (a memory or a rule may be stale).
 4. **Must-fix found:** fix it before proceeding with the use/update (rename leftovers, broken pointers, missing required files, machine-local values in committed content, id mismatch, file language against the norms). Fixes follow the norms files and the git workflow of `jeffrey-agent-workflow-skill`.
 5. **Preference-level findings** (wording, structure taste): report them; fix in the same turn when the user asked for a check-and-fix, otherwise list them for his decision.
 6. Report (§ Report). No page, no viewer.
@@ -70,6 +70,7 @@ Short Chinese summary in chat:
 ## Must
 
 - Run the gate before using or updating covered content; quick before use, full before update.
+- Run the fixed check script for scriptable checks; sediment newly discovered repeatable checks into the script's proper home (`scripts/` of the owning skill).
 - Read the current agent app’s spec for the content type before checking it.
 - Fix must-fix findings before proceeding; report preference-level findings for Jeffrey’s decision.
 - Verify against current file state, not against what a memory or an old rule claims.

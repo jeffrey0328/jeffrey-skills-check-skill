@@ -1,54 +1,56 @@
 # jeffrey-agent-check-skill
 
-[中文](README.zh.md)
+[English](README-EN.md)
 
-Norms and mandatory checks for all agent-related content — skills, plugins, projects, rules, and memory. Everything is created and maintained to two standards: the current agent app’s own spec for that content type, plus Jeffrey’s standing preferences. A check runs before any covered content is used or updated; results are reported in the conversation (there is no Review page).
+Agent 相关内容的规范与强制检查枢纽，覆盖五个域：skill、插件、项目（治理文件）、规则、memory。所有内容都按两条标准创建和维护：当前 Agent 应用自己对该类内容的规范，加上 Jeffrey 的固定偏好。任何被覆盖的内容在使用前、更新前都要先过检查；结果在对话里报告（没有 Review 页面）。
 
-## Install
+## 安装
 
-Install through the current agent. Paste the fenced block to that agent.
+通过 Agent 安装。把下面代码块整段交给当前 Agent。
 
 ```
-Install the skill "jeffrey-agent-check-skill" into the agent app you are currently running in.
-Repo: https://github.com/jeffrey0328/jeffrey-agent-check-skill.git
-Steps:
-1. First read and follow this agent app's current skill spec (install directory, frontmatter, how skills are attached, project pointers, human-page requirements). Do not edit files until that spec is read. Do not apply another agent product's paths or fields from memory.
-2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "jeffrey-agent-check-skill".
-3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/ or examples/.
+请把 skill「jeffrey-agent-check-skill」安装到你当前所在的 Agent 应用。
+仓库：https://github.com/jeffrey0328/jeffrey-agent-check-skill.git
+步骤：
+1. 先读取并遵守你当前这个 Agent 的 skill 规范（安装目录、frontmatter、挂载方式、项目指针、人类页要求）。未读到该规范之前不要改文件。不要凭记忆套用某一个 Agent 产品的路径和字段。
+2. 按该规范把该仓库克隆到当前 Agent 的默认 skills 路径，文件夹名用「jeffrey-agent-check-skill」。
+3. 再按该规范改本 skill 里需要对接到当前 Agent 的部分。不要通读 references/、examples/ 里的流程正文。
 ```
 
-## Features
+## 功能介绍
 
-- Covers five domains: skills, plugins, projects (governance files), rules, and memory — each with its own norms and check list, all measured against the current agent app’s spec plus Jeffrey’s preferences.
-- Mandatory gate: a quick check before covered content is used, a full check before it is created or updated. Must-fix findings are fixed before proceeding; preference-level findings are listed for Jeffrey’s decision.
-- `/agent-check` checks all five domains and reports in chat; it can be narrowed to one domain or one specific item.
-- Keeps every skill in the same shape: thin routing hub, three layers, bilingual README pair, spoken names (叫法) from Jeffrey, one `jeffrey-<function>-skill` id for folder / name / repo, and old-name cleanup after a rename.
-- Agent-specific settings keep their own branch: what only one agent app needs lives on its `agent/<agent>` branch in `<agent>-spec.md`, never in the shared default branch; every skill update runs this conformance split.
-- Records Jeffrey’s standing preferences in one page; a newly stated preference is written in place and existing content is checked for contradictions.
-- Resident sync: when any other skill is created or updated in the same turn, its companions are checked and aligned before the turn ends.
+- 覆盖五个域：skill、插件、项目（治理文件）、规则、memory，每个域有自己的规范和检查清单，统一按当前 Agent 的规范 + Jeffrey 的偏好来衡量。
+- 强制检查门：被覆盖的内容使用前先快查，创建或更新前先全查。必须修的问题先修再继续；偏好层面的问题列出来给 Jeffrey 定。
+- 能脚本化的检查由固定检查脚本跑（结构、id、指针、机器本地值、文件语言、README 对形态），不每次现写代码；发现新的可复用检查就沉淀进脚本。
+- `/agent-check` 检查全部五个域并在对话里报告；也可以只查一个域或一个具体对象。
+- 管每个 skill 必须怎么写：薄路由枢纽、三层结构、README 一对（`README.md` 中文默认 + `README-EN.md` 英文）、叫法由 Jeffrey 定、全局 skill 的文件夹/名字/仓库名同一个 `jeffrey-<功能名>-skill` id，改名后清理旧名引用。
+- 每个 Agent 特定的设置保留自己的分支：只有某个 Agent 才需要的内容放在它自己的 `agent/<agent>` 分支的 `<agent>-spec.md` 里，不进共用的默认分支；每次更新 skill 都做这个适配拆分。
+- Jeffrey 的固定偏好记在一页里；新说出的偏好就地写入，并检查已有内容有没有冲突。
+- 常驻同步：同一轮里其他 skill 被创建或修改时，结束前核对并补齐它的配套文件。
 
-## How to use
+## 怎么用
 
-**Resident** — the agent attaches this skill on its own, in every conversation; you do not have to `@` it. It fires whenever covered content is about to be used or updated, and whenever you ask for a check. You can still say `/jeffrey-agent-check-skill` or `@jeffrey-agent-check-skill`.
+**常驻** —— 每轮对话 Agent 自己会挂载，不需要你 `@`。只要被覆盖的内容要被使用或更新，或者你要求检查，它就会生效。仍然可以说 `/jeffrey-agent-check-skill` 或 `@jeffrey-agent-check-skill`。
 
-| You say | What happens |
-|---------|--------------|
-| `/agent-check` | Checks skills, plugins, projects, rules, and memory; reports per domain in chat |
-| `/agent-check skill` (or `plugin` / `project` / `rule` / `memory`) | Checks that one domain only |
-| `/agent-check <name-or-path>` | Checks one specific skill, plugin, project, rule file, or memory scope |
-| “create a skill that …” / “update this skill” | The agent reads the authoring spec, runs the update-time check, writes to the shared form, and syncs the READMEs |
-| “check whether this plugin follows the spec” | The plugin norms check runs and reports |
-| “from now on I prefer …” | The preference is recorded in place; contradicting content is listed |
+| 你说 | 会发生什么 |
+|------|------------|
+| `/agent-check` | 检查 skill、插件、项目、规则、memory，按域在对话里报告 |
+| `/agent-check skill`（或 `plugin` / `project` / `rule` / `memory`） | 只查这一个域 |
+| `/agent-check <名字或路径>` | 只查一个具体的 skill、插件、项目、规则文件或 memory 范围 |
+| 「建一个 skill 做…」/「改一下这个 skill」 | Agent 先读编写规范、做更新前检查，按统一形态落盘并同步 README |
+| 「检查这个插件符不符合规范」 | 按插件规范检查并报告 |
+| 「以后我偏好…」 | 偏好就地写入偏好页，列出冲突的内容 |
 
-## Common changes
+## 常见改动
 
-Say one of these to the agent; it finds and edits the right file itself.
+下面这些话直接对 Agent 说，它自己去找并改对应文件。
 
-| What to change | Say to the agent |
-|----------------|------------------|
-| The skill-authoring norms (how any skill must be written) | “Change the skill-authoring norms: `<new requirement>`, and roll it out to every skill” |
-| A domain’s checking standards (plugin / project / rule / memory) | “Add a check to the `<domain>` norms: `<rule>`, and treat it as must-fix” |
-| When and how deep the gate checks | “Before use, also check `<item>`” / “Make the quick check cover `<item>`” |
-| A standing preference | “From now on I prefer `<preference>`” — recorded in the preferences page, contradictions reported |
-| Which content types are covered | “Also cover `<content type>` in the check” |
-| A shared convention across all skills (companion files, hub shape) | “`<new convention>` — apply it to every skill, not just this one” |
+| 想改什么 | 对 Agent 说 |
+|----------|-------------|
+| skill 编写规范（任何 skill 必须怎么写） | 「改一下 skill 编写规范：`<新要求>`，并铺开到每个 skill」 |
+| 某个域的检查标准（插件 / 项目 / 规则 / memory） | 「`<域>` 规范加一条检查：`<规则>`，算必须修」 |
+| 检查的时机和深度 | 「使用前也查一下 `<项目>`」/「快查加上 `<项目>`」 |
+| 固定检查脚本覆盖的检查项 | 「检查脚本加上 `<检查项>`」——新检查写进脚本，不留在对话里 |
+| 一条固定偏好 | 「以后我偏好 `<偏好>`」——写入偏好页，冲突的内容列出来 |
+| 覆盖哪些内容类型 | 「把 `<内容类型>` 也纳入检查」 |
+| 一条要全套 skill 一起遵守的约定（配套文件、hub 形态） | 「`<新约定>`，全部 skill 都改，不只这一个」 |
