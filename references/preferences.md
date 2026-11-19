@@ -20,6 +20,7 @@ The second half of the check standard (the first half is the current agent app�
 ## Working style
 
 - Ask yes/no and small-choice questions on the question card with preset options; open-ended questions stay in conversation.
+- Feedback and reports describe every change or gap by its content and purpose in plain language, never by bare file name — Jeffrey does not memorize file roles. A file path may follow as a trailing hint, never as the subject of the finding.
 - One conversation does one thing (or a few related things); clearly unrelated input goes to a new chat.
 - Edit the original in place — update the existing passage, or add at the fitting place; never append to the end by default.
 - After every skill update, tell Jeffrey what changed and ask whether to push; commit and push only after he agrees. A push command he typed himself already counts as agreement.
