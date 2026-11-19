@@ -50,7 +50,12 @@ MACHINE_LOCAL = [
     (re.compile(r"\bBasic [A-Za-z0-9+/=]{16,}"), "embedded Basic credential"),
 ]
 SKIP_FILE_NAMES = {"local.md", "local.example.md"}
-LANG_EXEMPT = {"DEVLOG.md"}
+# Standard install locations and documented product defaults are generic, not
+# machine-local: Program Files paths, and Unreal Remote Control API port 30010.
+DEFAULT_PORTS = {"30010"}
+# Historical logs record past file names, paths, and wording — exempt from
+# language, pointer, and hygiene checks (they are records, not live guidance).
+LOG_FILES = {"DEVLOG.md", "changelog.md", "error-log.md"}
 
 
 def cjk_ratio(text: str) -> float:
@@ -65,6 +70,11 @@ def strip_frontmatter(text: str) -> str:
         if end != -1:
             return text[end + 4:]
     return text
+
+
+def strip_inline_code(text: str) -> str:
+    # Backticked spans are identifiers (paths, commands, folder names), not prose.
+    return re.sub(r"`[^`\n]*`", "", text)
 
 
 def strip_fences(text: str) -> str:
@@ -124,7 +134,7 @@ def iter_text_files(root: Path):
         rel = path.relative_to(root)
         if any(part.startswith(".") or part in {"node_modules", "__pycache__"} for part in rel.parts):
             continue
-        if path.name in SKIP_FILE_NAMES or path.name.endswith("-spec.md"):
+        if path.name in SKIP_FILE_NAMES or path.name in LOG_FILES or path.name.endswith("-spec.md"):
             continue
         yield path
 
@@ -135,7 +145,7 @@ def check_language(report: Report, path: Path, rel: str, expect: str):
     except UnicodeDecodeError:
         report.must_fix("encoding", f"{rel} is not valid UTF-8", rel)
         return
-    body = strip_fences(strip_frontmatter(text))
+    body = strip_inline_code(strip_fences(strip_frontmatter(text)))
     ratio = cjk_ratio(body)
     if expect == "zh" and ratio < 0.15:
         report.must_fix("language", f"{rel} must be Chinese (default human page); CJK ratio {ratio:.2f}", rel)
@@ -148,19 +158,28 @@ def check_language(report: Report, path: Path, rel: str, expect: str):
 
 def check_links(report: Report, root: Path, path: Path, rel: str):
     text = path.read_text(encoding="utf-8")
-    prose = re.sub(r"`[^`\n]*`", "", text)  # inline code spans hold link examples, not live links
-    for m in LINK.finditer(prose):
-        target = m.group(1).split("#")[0]
-        if not target or re.match(r"^[a-z]+:", target) or target.startswith("<"):
+    in_fence = False
+    for i, line in enumerate(text.splitlines(), 1):
+        if FENCE.match(line):
+            in_fence = not in_fence
             continue
-        if not (path.parent / target).exists():
-            report.must_fix("pointer", f"broken link → {target}", rel, prose[:m.start()].count("\n") + 1)
-    for m in BACKTICK_PATH.finditer(text):
-        target = m.group(1)
-        if "*" in target:
-            continue
-        if not (root / target).exists() and not (path.parent / target).exists():
-            report.must_fix("pointer", f"cited path missing → {target}", rel, text[:m.start()].count("\n") + 1)
+        if in_fence:
+            continue  # fenced blocks hold templates/examples, not live links
+        prose = re.sub(r"`[^`\n]*`", "", line)  # inline code spans hold link examples
+        for m in LINK.finditer(prose):
+            target = m.group(1).split("#")[0]
+            if not target or re.match(r"^[a-z]+:", target) or target.startswith("<"):
+                continue
+            if not (path.parent / target).exists():
+                report.must_fix("pointer", f"broken link → {target}", rel, i)
+        for m in BACKTICK_PATH.finditer(line):
+            target = m.group(1)
+            if "*" in target:
+                continue
+            if re.search(r"`(?:jeffrey-[a-z0-9-]+-skill|stride-[a-z0-9-]+)`", line):
+                continue  # cross-skill citation — resolved by the agent, not this tree
+            if not (root / target).exists() and not (path.parent / target).exists():
+                report.must_fix("pointer", f"cited path missing → {target}", rel, i)
 
 
 def check_hygiene(report: Report, path: Path, rel: str):
@@ -171,6 +190,10 @@ def check_hygiene(report: Report, path: Path, rel: str):
                 snippet = m.group(0)
                 start = m.start()
                 if "<" in line[max(0, start - 1):start + len(snippet) + 1]:
+                    continue
+                if label == "drive-letter path" and re.search(r"Program Files", line, re.I):
+                    continue
+                if label == "local port" and snippet.rsplit(":", 1)[-1] in DEFAULT_PORTS:
                     continue
                 report.review("machine-local", f"possible {label}: {snippet!r} — confirm or move to local.md", rel, i)
         if path.suffix == ".md" and not NAME_EXCEPTION.search(line):
@@ -281,7 +304,7 @@ def check_skill(root: Path, depth: str) -> Report:
         rel = path.relative_to(root).as_posix()
         if path.suffix == ".md":
             check_links(report, root, path, rel)
-            if path.name not in {"README.md", "README-EN.md"} and path.name not in LANG_EXEMPT:
+            if rel not in {"README.md", "README-EN.md"}:
                 check_language(report, path, rel, "en")
         if path.suffix in {".md", ".py", ".ps1", ".sh", ".json", ".txt"}:
             check_hygiene(report, path, rel)
