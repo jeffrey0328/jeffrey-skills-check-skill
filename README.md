@@ -1,43 +1,44 @@
-# jeffrey-skills-check-skill
+# jeffrey-agent-check-skill
 
 [中文](README.zh.md)
 
-Skill-shape norms plus Feishu-style Review for skills under the current agent app’s default skills path. It keeps every skill in the same shape, and gives you one page to see which skills are healthy and which are missing pieces.
+Norms and mandatory checks for all agent-related content — skills, plugins, projects, rules, and memory. Everything is created and maintained to two standards: the current agent app’s own spec for that content type, plus Jeffrey’s standing preferences. A check runs before any covered content is used or updated; results are reported in the conversation (there is no Review page).
 
 ## Install
 
 Install through the current agent. Paste the fenced block to that agent.
 
 ```
-Install the skill "jeffrey-skills-check-skill" into the agent app you are currently running in.
-Repo: https://github.com/jeffrey0328/jeffrey-skills-check-skill.git
+Install the skill "jeffrey-agent-check-skill" into the agent app you are currently running in.
+Repo: https://github.com/jeffrey0328/jeffrey-agent-check-skill.git
 Steps:
 1. First read and follow this agent app's current skill spec (install directory, frontmatter, how skills are attached, project pointers, human-page requirements). Do not edit files until that spec is read. Do not apply another agent product's paths or fields from memory.
-2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "jeffrey-skills-check-skill".
-3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/, review-body.md, or examples/.
+2. Following that spec, clone this repo into this agent app's default skills path, using the folder name "jeffrey-agent-check-skill".
+3. Then change only the parts of this skill that must bind to the current agent, following that spec. Do not read through the process prose in references/ or examples/.
 ```
 
 ## Features
 
-- Keeps every skill in the same shape: when one is created or edited, the agent writes it to the shared form and keeps the human pages and Review pages in sync. After every skill update the agent checks whether both READMEs still match and updates them when they do not.
-- Global skills use one id, `jeffrey-<function>-skill`, for the folder, the skill name, and the git repo. Review flags a mismatch. A Stride skill uses the `stride-` prefix instead, for example `stride-workbench`. Project skills and system skills are left alone.
-- Each skill’s spoken names (叫法) come from Jeffrey: the agent asks for them when a skill is created and records them only in the `description` of that skill’s own `SKILL.md`.
-- File language: Chinese only in the Chinese README, the three Review pages and `tag.txt`; everything else is English. The English `README.md` stays because GitHub shows it by default.
-- After a global skill is renamed, old directory names in global skills, commands, and rules are updated. Review flags a path that still points at a missing skill directory.
-- Opens the all-skills overview and a single skill’s Review page: the overview preflights the fleet; a single `/skill-review` with that skill named preflights that skill only. Flagged items have 开对话 (prefilled chat, confirm send) and Ignore.
-- Filters the overview by tag or type (演进型 / 底本型), and lets you right-click a card to edit tags or switch type (saves immediately).
-- Adds Review companions and that skill’s own `/skill-review` to a skill that does not have them yet.
+- Covers five domains: skills, plugins, projects (governance files), rules, and memory — each with its own norms and check list, all measured against the current agent app’s spec plus Jeffrey’s preferences.
+- Mandatory gate: a quick check before covered content is used, a full check before it is created or updated. Must-fix findings are fixed before proceeding; preference-level findings are listed for Jeffrey’s decision.
+- `/agent-check` checks all five domains and reports in chat; it can be narrowed to one domain or one specific item.
+- Keeps every skill in the same shape: thin routing hub, three layers, bilingual README pair, spoken names (叫法) from Jeffrey, one `jeffrey-<function>-skill` id for folder / name / repo, and old-name cleanup after a rename.
+- Agent-specific settings keep their own branch: what only one agent app needs lives on its `agent/<agent>` branch in `<agent>-spec.md`, never in the shared default branch; every skill update runs this conformance split.
+- Records Jeffrey’s standing preferences in one page; a newly stated preference is written in place and existing content is checked for contradictions.
+- Resident sync: when any other skill is created or updated in the same turn, its companions are checked and aligned before the turn ends.
 
 ## How to use
 
-**Resident** — the agent attaches this skill on its own, in every conversation; you do not have to `@` it. It fires whenever a skill is created or edited (the agent reads the authoring spec first), and whenever you ask to see the state of your skills. You can still say `/skill-review`, `/jeffrey-skills-check-skill`, or `@jeffrey-skills-check-skill`.
+**Resident** — the agent attaches this skill on its own, in every conversation; you do not have to `@` it. It fires whenever covered content is about to be used or updated, and whenever you ask for a check. You can still say `/jeffrey-agent-check-skill` or `@jeffrey-agent-check-skill`.
 
 | You say | What happens |
 |---------|--------------|
-| `/skill-review` | Checks every skill first, then opens the all-skills overview (filter by type or tags; right-click a card to edit tags or switch 演进型 / 底本型) |
-| `/<any-skill> /skill-review` | Checks that skill only, then opens its page |
-| “create a skill that …” / “update this skill” | The agent applies the skill-shape norms and syncs the human pages |
-| “add `<skill>` to Review” | That skill gets the required companion files and its own `/skill-review` |
+| `/agent-check` | Checks skills, plugins, projects, rules, and memory; reports per domain in chat |
+| `/agent-check skill` (or `plugin` / `project` / `rule` / `memory`) | Checks that one domain only |
+| `/agent-check <name-or-path>` | Checks one specific skill, plugin, project, rule file, or memory scope |
+| “create a skill that …” / “update this skill” | The agent reads the authoring spec, runs the update-time check, writes to the shared form, and syncs the READMEs |
+| “check whether this plugin follows the spec” | The plugin norms check runs and reports |
+| “from now on I prefer …” | The preference is recorded in place; contradicting content is listed |
 
 ## Common changes
 
@@ -46,13 +47,8 @@ Say one of these to the agent; it finds and edits the right file itself.
 | What to change | Say to the agent |
 |----------------|------------------|
 | The skill-authoring norms (how any skill must be written) | “Change the skill-authoring norms: `<new requirement>`, and roll it out to every skill” |
-| The Review checking standards (what counts as 缺件 vs 需关注) | “Add a Review check: `<rule>`, and treat it as 缺件 / 需关注” |
-| What one skill’s Review page says (简介 / 能做什么 / 使用方法) | “Change `<skill>`’s Review 简介 to `<text>`” |
-| How Review「能做什么」is laid out | “Write 能做什么 as a bullet list, not a paragraph” |
-| How「功能描述」vs「执行步骤」split | “功能描述 is the feature and its rules; 执行步骤 is what each step does; don’t repeat commands or steps” |
-| The tag shown on a skill’s card | Right-click that card on the overview and pick 编辑标签; or say “Change `<skill>`’s tag to `<tag>`” |
-| A skill’s type (演进型 / 底本型) | Right-click that card and pick 标为演进型 / 标为底本型; or say “把 `<skill>` 改成底本型” |
-| Which tags the vocabulary offers | “Add `<tag>` to the tag vocabulary and drop `<old tag>`” |
-| Where Review opens (built-in vs external browser, port) | “Open Review in the external browser” / “Use port `<n>` for Review” |
-| Check the whole fleet even when opening one skill’s Review | “When /skill-review opens a single page, still check every skill first” |
+| A domain’s checking standards (plugin / project / rule / memory) | “Add a check to the `<domain>` norms: `<rule>`, and treat it as must-fix” |
+| When and how deep the gate checks | “Before use, also check `<item>`” / “Make the quick check cover `<item>`” |
+| A standing preference | “From now on I prefer `<preference>`” — recorded in the preferences page, contradictions reported |
+| Which content types are covered | “Also cover `<content type>` in the check” |
 | A shared convention across all skills (companion files, hub shape) | “`<new convention>` — apply it to every skill, not just this one” |
