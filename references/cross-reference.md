@@ -24,7 +24,7 @@ Records **who references each tracked file** and whether the reference is to the
 |---------------|------|
 | `SKILL.md` Commands + Route「Check before using or updating」+ Always | 整篇 + § When / § Depth |
 | `hub-norms.md` File index + Must + DoD | 整篇 |
-| `skill-authoring.md` header + § File roles + § Positive / negative norms | 整篇（gate） |
+| `skill-authoring.md` header + § File roles + § Positive / negative norms + § Language | 整篇（gate）+ § Depth |
 | `plugin-norms.md` / `project-norms.md` / `rule-norms.md` / `memory-norms.md` headers + check lists | § Depth / § Flow |
 | `sync-on-update.md` § Resident | 整篇（full depth） |
 
@@ -59,6 +59,7 @@ Records **who references each tracked file** and whether the reference is to the
 | `SKILL.md` Route「Project」| 整篇 |
 | `hub-norms.md` File index | 整篇 |
 | `agent-check.md` § Covered content + § Domains | 整篇 |
+| **Cites:** sibling `jeffrey-agent-workflow-skill/SKILL.md` § Projects (Governance files 表 + § Check list File language 行) | § Projects |
 
 ### rule-norms.md
 | Referenced by | 范围 |
