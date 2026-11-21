@@ -1,22 +1,27 @@
 # Rule norms & checks
 
-Rules (user-level `AGENTS.md` in the agent config home, project `.mdc`, global commands) are created and maintained per the current agent app’s rule spec plus `preferences.md`. Canonical decision and format rules live in `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` and `project-rules.md` — this file routes there and adds the check standard.
+Rules (user-level `AGENTS.md` in the agent config home, project `.mdc`, global commands) are created and maintained per the current agent app’s rule spec plus `preferences.md`. Canonical decision and format rules live in `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` and `project-rules.md`; placement of agent-only content is canonical in § Which home below. This file routes there and adds the check standard.
 
 **读法:** § Which home for placement; § Check list for the gate.
 
 ## Which home
 
-Triage before creating (Rule vs Skill, wait for Jeffrey’s confirmation) and placement of agent-only content follow `jeffrey-agent-workflow-skill/references/rule-vs-skill.md`:
+Triage before creating (Rule vs Skill, wait for Jeffrey’s confirmation) follows `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` § Decision criteria. Placement of agent-only content is canonical here:
 
-- Rule, script, command or hook for one agent app, outside any skill → that app’s own config repo, global config directory.
-- Agent-only part of a shared skill → that skill repo’s `agent/<agent>` branch, one `<agent>-spec.md` — `skill-authoring.md` § Agent-specific spec file.
-- What every agent app reads → shared parts: skill default branch, plugin, `AGENTS.md`.
+| Content | Home |
+| --- | --- |
+| Rule, script, command or hook for one agent app, outside any skill | That app’s own config repo (one repo per agent app, no branches), in its global config directory, not in a project |
+| Agent-only part of a skill that several agent apps share | A per-agent branch of that skill’s own repo (`agent/<agent>`), as one `<agent>-spec.md` in the skill folder root — `skill-authoring.md` § Agent-specific spec file |
+| Skill for one agent app only | That app’s skills parent repo |
+| What every agent app reads | The shared parts: skill on the default branch, plugin, `AGENTS.md` |
+
+A shared skill mentions an agent-specific procedure only generically (“the current agent app’s procedure”) and points to where it lives.
 
 ## Check list (full)
 
 | Check | Pass |
 |-------|------|
-| Placement | Content sits in the home `rule-vs-skill.md` assigns; agent-only content is on the `agent/<agent>` branch, not in shared files |
+| Placement | Content sits in the home § Which home assigns; agent-only content is on the `agent/<agent>` branch, not in shared files |
 | Format | `.mdc` frontmatter and structure per `project-rules.md` § 3; user `AGENTS.md` sections current |
 | Writing norms | Positive/negative pairing per `skill-authoring.md` § Positive / negative norms; partial-read friendly (sectioned, 读法 table when long) |
 | Pointers | Every skill/file pointer resolves; no leftover path to a renamed skill directory |

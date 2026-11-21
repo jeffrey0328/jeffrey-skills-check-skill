@@ -67,6 +67,7 @@ Records **who references each tracked file** and whether the reference is to the
 | `SKILL.md` Route「Rule」| whole file |
 | `hub-norms.md` File index | whole file |
 | `agent-check.md` § Covered content + § Domains | whole file |
+| sibling `jeffrey-agent-workflow-skill/references/rule-vs-skill.md` § Where agent-specific content lives (placement pointer) | § Which home |
 
 ### memory-norms.md
 | Referenced by | Scope |
