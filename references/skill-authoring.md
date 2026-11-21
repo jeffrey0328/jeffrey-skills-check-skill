@@ -29,6 +29,7 @@ Write only from what you read. Prefer repo-local facts; use **web search** only 
 | `references/cross-reference.md` | Agent | 关联记录 — who references each tracked file (whole/§); read before editing, update after |
 | `README.md` | Human | Chinese README — **required**, the default human page; link to `README-EN.md` |
 | `README-EN.md` | Human | English README — **required**; link to `README.md` |
+| `DEVLOG.md` | Human | Chinese update log — **required**; newest entry first, one entry per meaningful update — § Update log |
 | `kind.txt` | Agent | Rewrite policy: one line `演进` or `底本` — § Skill kind |
 | `<agent>-spec.md` | Agent | Optional, **only on that agent app's branch** of the skill repo: the part only that app understands. Indexed from `SKILL.md` by the naming rule alone — see § Agent-specific spec file |
 | `examples/` | Both | Layer-3 cases (see **Three layers**) |
@@ -62,7 +63,7 @@ When a skill workflow would **dynamically write code** (ad-hoc Shell that grows 
 
 1. **Add** the asset under the skill that owns the workflow: `scripts/` (runnable, bound to a Command/flag), `examples/` (templates to adapt), or `references/` (documented snippets).
 2. **Document when to use**: Commands / Route row, and/or a short **When** in the script header or the matched `references/*.md` section.
-3. **Sync companions** if humans need the new action (`README.md` + `README-EN.md`) — same as § Synchronize companion files.
+3. **Sync companions** if humans need the new action (`README.md` + `README-EN.md`, `DEVLOG.md` entry) — same as § Synchronize companion files.
 4. Tell the user what was added and the **when** trigger.
 
 **Must not:** Re-invent the same helper as chat-only dynamic code every session when it belongs in that skill. *(← Must: prefer static + document when)*
@@ -253,12 +254,23 @@ Every skill answers to the names Jeffrey actually says. This skill owns that rul
 |------|----------|
 | `README.md` | Chinese (default human page); top link to `README-EN.md` |
 | `README-EN.md` | English; top link to `README.md` |
+| `DEVLOG.md` | Chinese (update log); paths, identifiers and commands keep their original form — § Update log |
 | Everything else: `SKILL.md`, `references/`, `examples/`, headings, body | English |
 
 - The YAML `description` is English and also carries the skill’s spoken names (which may be Chinese) — § Spoken names.
 - Speak to Jeffrey in his language in conversation; the table above governs files only.
 - A language violation is **must-fix** at both depths: the quick check (before use) and the full check (before update) both verify this table — `agent-check.md` § Depth.
 - A product / project repo (not a skill) follows its own file rules in `jeffrey-agent-workflow-skill` § Projects.
+
+## Update log (DEVLOG, required)
+
+Every skill keeps `DEVLOG.md` at its root, written **entirely in Chinese** (file paths, identifiers and commands keep their original form). It is the skill's update history: what changed, why, and which files were touched. Jeffrey reads it.
+
+- Newest entry first. Entry heading: `## YYYY-MM-DD HH:MM +08` (local time).
+- Each entry carries three bullets: **改了什么** (the concrete change), **为何** (the trigger: Jeffrey's instruction, an observed pitfall, a cited source change), **涉及** (files touched; companions checked, or why skipped).
+- Write one entry per meaningful update (content, scripts, layout). A pure typo/format fix may skip the entry but still runs the companion check.
+- Missing `DEVLOG.md`, or a non-Chinese body, is must-fix at both depths.
+- Entries already written in another language are translated into Chinese in place (same facts), not left bilingual.
 
 ## Auto-invocation decision (required when creating)
 
@@ -345,6 +357,8 @@ Do not add a learn-from-runs or agent-driven rewrite loop. Source-change updates
 
 After **every** skill update (any change to `SKILL.md`, `references/`, `scripts/`, `examples/`, or the layout), check whether `README.md` and `README-EN.md` still describe the skill, and update both when they do not. A typo fix needs only the check. Then check the rest:
 
+- **`DEVLOG.md`**: add this update's entry (改了什么 / 为何 / 涉及), in Chinese — § Update log.
+
 - **`README.md`**: Chinese; `[English](README-EN.md)` after the title; order 简介 → `## 安装` → `## 功能介绍` → `## 怎么用` → `## 常见改动` → 其他. Install = one **Chinese** agent prompt (git URL + 步骤). No `When` / `How to invoke` H2, no file-roles table. See § README at skill root + § Install prompt.
 - **`README-EN.md`**: English; `[中文](README.md)` after the title; same order with `## Install` and the **English** prompt, then Features / How to use / Common changes. Same facts as `README.md`.
 - **`常见改动` rows**: if this change added or moved a knob a user would ask to change (norms, checking standards, data store, output paths, triggers), update the row in **both** READMEs.
@@ -381,4 +395,4 @@ Skip only for pure typo/format fixes with no Route/`description`/workflow change
 
 If this write was an agent-driven update to a **演进型** skill (observed use / pitfall / implementation, not a user command that already stated the exact change), also include **更新标准 / 更新依据 / 更新条目** — § Skill kind.
 
-If a companion file needs no change, say why in the summary. Meaningful skill changes should keep `SKILL.md`, `README.md`, `README-EN.md`, `examples/`, and `references/` aligned in substance.
+If a companion file needs no change, say why in the summary. Meaningful skill changes should keep `SKILL.md`, `README.md`, `README-EN.md`, `DEVLOG.md`, `examples/`, and `references/` aligned in substance.

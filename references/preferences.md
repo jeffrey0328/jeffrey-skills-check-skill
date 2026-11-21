@@ -12,7 +12,7 @@ The second half of the check standard (the first half is the current agent app�
 
 ## Skill shape & language
 
-- Agent-facing artifacts in English; a bilingual README pair everywhere (`README.md` Chinese default, `README-EN.md` English) carrying the same facts, links both ways. Chinese belongs in `README.md` and a project's `DEVLOG.md`; conversation with Jeffrey is in Chinese.
+- Agent-facing artifacts in English; a bilingual README pair everywhere (`README.md` Chinese default, `README-EN.md` English) carrying the same facts, links both ways; every skill also keeps an all-Chinese `DEVLOG.md` update log. Chinese belongs in `README.md`, the skill `DEVLOG.md`, and a project's `DEVLOG.md`; conversation with Jeffrey is in Chinese.
 - `SKILL.md` stays a thin routing hub; detail in English `references/`, user-facing explanation in the READMEs.
 - 叫法: ask Jeffrey first; record only in that skill’s `description`.
 - Rewrite policy per skill (`kind.txt`, one line): `演进` — the agent may improve it from observed use, with a documented update loop and the 更新标准 / 更新依据 / 更新条目 brief after each agent-driven update; `底本` — no spontaneous rewrite, updates only from Jeffrey’s direct command or a cited source change. This skill is `底本`.

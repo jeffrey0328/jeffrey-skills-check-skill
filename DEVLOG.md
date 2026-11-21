@@ -1,0 +1,6 @@
+# DEVLOG
+
+## 2026-11-21 14:30 +08
+- 改了什么：新增 skill 必备配套「全中文更新日志」规范。`references/skill-authoring.md`：§ File roles 加 `DEVLOG.md` 行；新增 § Update log（根目录、全中文、最新在前、每条 改了什么/为何/涉及、每次实质更新一条、缺失或非中文两档均 must-fix、旧外文条目就地翻译）；§ Language 表加 `DEVLOG.md` 中文行；§ Synchronize companion files、§ Post-write user brief、§ Prefer static 同步。`references/hub-norms.md`：File index 加行、Human entry 段、配套必备条、语言条、DoD 同步。`references/agent-check.md` Quick 档语言口径与 § Flow 脚本描述同步。`references/preferences.md` skill 形态语言条同步。`references/sync-on-update.md` 配套表加 `DEVLOG.md` 行。`scripts/run_agent_check.py`：`check_skill` 加 DEVLOG 存在与中文检查，英文语言循环豁免 `DEVLOG.md`。本 skill 补建本文件；`jeffrey-agent-config-skill`、`jeffrey-repo-sync-skill` 补建种子日志；`jeffrey-agent-workflow-skill` 英文日志就地转中文并补记当日更新。
+- 为何：Jeffrey 2026-11-21：skill 除了中文 README.md 其余全英文（README 中英对仍强制必备，经卡片确认维持现状），并再加一个全中文的更新日志。
+- 涉及：`references/skill-authoring.md`、`references/hub-norms.md`、`references/agent-check.md`、`references/preferences.md`、`references/sync-on-update.md`、`references/cross-reference.md`、`scripts/run_agent_check.py`、两份 README、`DEVLOG.md`（新建）；舰队其余 skill 的 DEVLOG 补齐与检查另记。

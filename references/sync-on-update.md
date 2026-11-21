@@ -19,6 +19,7 @@ When you change a skill’s workflow, constraints, triggers, examples, or layout
 | Companion | Sync when |
 |-----------|-----------|
 | `README.md` / `README-EN.md` | Purpose, triggers, install, or capabilities changed (keep both files in sync, same facts) |
+| `DEVLOG.md` | Any meaningful update: add this update's entry in Chinese (改了什么 / 为何 / 涉及) |
 | `kind.txt` | Only when the user asks to switch 演进 / 底本 |
 | `references/cross-reference.md` | Files or cited `##` / `§` headings were added, renamed, moved, or deleted |
 

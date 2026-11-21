@@ -298,6 +298,11 @@ def check_skill(root: Path, depth: str) -> Report:
     kind = root / "kind.txt"
     if not kind.is_file() or kind.read_text(encoding="utf-8").strip() not in {"演进", "底本"}:
         report.must_fix("structure", "kind.txt missing or not one line 演进 / 底本", "kind.txt")
+    devlog = root / "DEVLOG.md"
+    if not devlog.is_file():
+        report.must_fix("structure", "DEVLOG.md (Chinese update log) missing", "DEVLOG.md")
+    else:
+        check_language(report, devlog, "DEVLOG.md", "zh")
     xref = root / "references" / "cross-reference.md" if (root / "references").is_dir() else root / "cross-reference.md"
     if not xref.is_file():
         report.must_fix("structure", "cross-reference.md missing", str(xref.relative_to(root)))
@@ -313,7 +318,7 @@ def check_skill(root: Path, depth: str) -> Report:
         rel = path.relative_to(root).as_posix()
         if path.suffix == ".md":
             check_links(report, root, path, rel)
-            if rel not in {"README.md", "README-EN.md"}:
+            if rel not in {"README.md", "README-EN.md", "DEVLOG.md"}:
                 check_language(report, path, rel, "en")
         if path.suffix in {".md", ".py", ".ps1", ".sh", ".json", ".txt"}:
             check_hygiene(report, path, rel)

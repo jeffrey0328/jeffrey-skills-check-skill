@@ -32,7 +32,7 @@ Records **who references each tracked file** and whether the reference is to the
 | Referenced by | Scope |
 |---------------|------|
 | `SKILL.md` Route「Create/update Skill」+ Always「Authoring」| whole file + § Install prompt + § Global skill id + § Agent-specific spec file |
-| `hub-norms.md` File index + Must + DoD | whole file + § File roles / § Spoken names / § Language / § Global skill id / § Agent-specific spec file |
+| `hub-norms.md` File index + Must + DoD | whole file + § File roles / § Spoken names / § Language / § Update log / § Global skill id / § Agent-specific spec file |
 | `agent-check.md` § Domains | whole file |
 | `plugin-norms.md` § Structure | § Agent-app names + whole file (bundled skills) |
 | `project-norms.md` § Check list | § Positive / negative norms |

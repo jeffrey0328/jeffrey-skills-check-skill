@@ -21,9 +21,9 @@ Steps:
 
 - Covers five domains: skills, plugins, projects (governance files), rules, and memory — each with its own norms and check list, all measured against the current agent app’s spec plus Jeffrey’s preferences.
 - Mandatory gate: a quick check before covered content is used, a full check before it is created or updated. Must-fix findings are fixed before proceeding; preference-level findings are listed for Jeffrey’s decision.
-- Scriptable checks run through a fixed check script (structure, id, pointers, machine-local values, file language, README pair shape) instead of throwaway code each run; newly discovered repeatable checks are added to the script.
+- Scriptable checks run through a fixed check script (structure, id, pointers, machine-local values, file language, README pair shape, update log) instead of throwaway code each run; newly discovered repeatable checks are added to the script.
 - `/agent-check` checks all five domains and reports in chat; it can be narrowed to one domain or one specific item.
-- Keeps every skill in the same shape: thin routing hub, three layers, bilingual README pair (`README.md` Chinese default + `README-EN.md` English), spoken names (叫法) from Jeffrey, one `jeffrey-<function>-skill` id for folder / name / repo, and old-name cleanup after a rename.
+- Keeps every skill in the same shape: thin routing hub, three layers, bilingual README pair (`README.md` Chinese default + `README-EN.md` English), an all-Chinese update log `DEVLOG.md` (newest first, each entry 改了什么 / 为何 / 涉及), spoken names (叫法) from Jeffrey, one `jeffrey-<function>-skill` id for folder / name / repo, and old-name cleanup after a rename.
 - Agent-specific settings keep their own branch: what only one agent app needs lives on its `agent/<agent>` branch in `<agent>-spec.md`, never in the shared default branch; every skill update runs this conformance split.
 - Records Jeffrey’s standing preferences in one page; a newly stated preference is written in place and existing content is checked for contradictions.
 - Resident sync: when any other skill is created or updated in the same turn, its companions are checked and aligned before the turn ends.
